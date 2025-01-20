@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beregner</title>
+</head>
+<body>
+  <h1>Materiale Gebyr Beregner</h1>
+  <form id="beregner-form">
+    <label for="materiale">Materiale:</label>
+    <select id="materiale">
+      <option value="PP">PP (Polypropylen)</option>
+      <option value="PET">PET (Polyethylenterephthalat)</option>
+      <option value="Glas">Glas</option>
+      <option value="Metal">Metal</option>
+    </select>
+    <br><br>
+
+    <label for="genanvendelighed">Genanvendelighed (%):</label>
+    <input type="number" id="genanvendelighed" min="0" max="100" required>
+    <br><br>
+
+    <label for="vægt">Vægt (kg):</label>
+    <input type="number" id="vægt" min="0" required>
+    <br><br>
+
+    <button type="button" onclick="beregnGebyr()">Beregn</button>
+  </form>
+
+  <h2>Resultat:</h2>
+  <p id="resultat"></p>
+
+  <script>
+    function beregnGebyr() {
+      const genanvendelighed = parseFloat(document.getElementById("genanvendelighed").value);
+      const vægt = parseFloat(document.getElementById("vægt").value);
+      let niveau = "";
+      let gebyrPerKg = 0;
+
+      // Bestem niveau og gebyr pr. kg
+      if (genanvendelighed > 70) {
+        niveau = "Grøn";
+        gebyrPerKg = 1; // Eksempel på lavt gebyr
+      } else if (genanvendelighed >= 40) {
+        niveau = "Gul";
+        gebyrPerKg = 5; // Mellemgebyr
+      } else {
+        niveau = "Rød";
+        gebyrPerKg = 10; // Højere gebyr
+      }
+
+      // Beregn totalgebyr
+      const totalGebyr = vægt * gebyrPerKg;
+
+      // Vis resultat
+      document.getElementById("resultat").innerText = 
+        `Materialet placeres i ${niveau} niveau.
+        Totalgebyr: ${totalGebyr.toFixed(2)} kr.`;
+    }
+  </script>
+</body>
+</html>
