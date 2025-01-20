@@ -3,61 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beregner</title>
+  <title>Materiale Beregner</title>
 </head>
 <body>
-  <h1>Materiale Gebyr Beregner</h1>
-  <form id="beregner-form">
-    <label for="materiale">Materiale:</label>
-    <select id="materiale">
-      <option value="PP">PP (Polypropylen)</option>
-      <option value="PET">PET (Polyethylenterephthalat)</option>
-      <option value="Glas">Glas</option>
-      <option value="Metal">Metal</option>
-    </select>
-    <br><br>
+<h1>Materiale Gebyr Beregner</h1>
+<form id="beregner-form">
+  <div id="materialer-container">
+    <div class="materiale">
+      <label for="materiale-1">Materiale_1:</label>
+      <select class="materiale-type">
+        <option value="PP">PP (Polypropylen)</option>
+        <option value="PET">PET (Polyethylenterephthalat)</option>
+        <option value="Glas">Glas</option>
+        <option value="Metal">Metal</option>
+      </select>
+      <br>
+      <label for="genanvendelighed-1">Genanvendelighed (%):</label>
+      <input type="number" class="genanvendelighed" min="0" max="100" required>
+      <br>
+      <label for="vægt-1">Vægt (kg):</label>
+      <input type="number" class="vægt" min="0" required>
+      <br><br>
+    </div>
+  </div>
+  <button type="button" onclick="tilføjMateriale()">Tilføj Materiale</button>
+  <br><br>
+  <button type="button" onclick="beregnGebyr()">Beregn</button>
+</form>
 
-    <label for="genanvendelighed">Genanvendelighed (%):</label>
-    <input type="number" id="genanvendelighed" min="0" max="100" required>
-    <br><br>
+<h2>Resultat:</h2>
+<p id="resultat"></p>
 
-    <label for="vægt">Vægt (kg):</label>
-    <input type="number" id="vægt" min="0" required>
-    <br><br>
+<script>
+  let materialeCount = 1;
 
-    <button type="button" onclick="beregnGebyr()">Beregn</button>
-  </form>
+  function tilføjMateriale() {
+    materialeCount++;
+    const container = document.getElementById("materialer-container");
 
-  <h2>Resultat:</h2>
-  <p id="resultat"></p>
+    const materialeDiv = document.createElement("div");
+    materialeDiv.classList.add("materiale");
+    materialeDiv.innerHTML = `
+        <label for="materiale-${materialeCount}">Materiale ${materialeCount}:</label>
+        <select class="materiale-type">
+          <option value="PP">PP (Polypropylen)</option>
+          <option value="PET">PET (Polyethylenterephthalat)</option>
+          <option value="Glas">Glas</option>
+          <option value="Metal">Metal</option>
+        </select>
+        <br>
+        <label for="genanvendelighed-${materialeCount}">Genanvendelighed (%):</label>
+        <input type="number" class="genanvendelighed" min="0" max="100" required>
+        <br>
+        <label for="vægt-${materialeCount}">Vægt (kg):</label>
+        <input type="number" class="vægt" min="0" required>
+        <br><br>
+      `;
+    container.appendChild(materialeDiv);
+  }
 
-  <script>
-    function beregnGebyr() {
-      const genanvendelighed = parseFloat(document.getElementById("genanvendelighed").value);
-      const vægt = parseFloat(document.getElementById("vægt").value);
-      let niveau = "";
+  function beregnGebyr() {
+    const materialer = document.querySelectorAll(".materiale");
+    let totalGenanvendelighed = 0;
+    let totalVægt = 0;
+    let totalGebyr = 0;
+
+    materialer.forEach(materiale => {
+      const genanvendelighed = parseFloat(materiale.querySelector(".genanvendelighed").value);
+      const vægt = parseFloat(materiale.querySelector(".vægt").value);
       let gebyrPerKg = 0;
 
       // Bestem niveau og gebyr pr. kg
       if (genanvendelighed > 70) {
-        niveau = "Grøn";
-        gebyrPerKg = 1; // Eksempel på lavt gebyr
+        gebyrPerKg = 1; // Grøn
       } else if (genanvendelighed >= 40) {
-        niveau = "Gul";
-        gebyrPerKg = 5; // Mellemgebyr
+        gebyrPerKg = 5; // Gul
       } else {
-        niveau = "Rød";
-        gebyrPerKg = 10; // Højere gebyr
+        gebyrPerKg = 10; // Rød
       }
 
-      // Beregn totalgebyr
-      const totalGebyr = vægt * gebyrPerKg;
+      totalGenanvendelighed += genanvendelighed * vægt;
+      totalVægt += vægt;
+      totalGebyr += vægt * gebyrPerKg;
+    });
 
-      // Vis resultat
-      document.getElementById("resultat").innerText = 
-        `Materialet placeres i ${niveau} niveau.
-        Totalgebyr: ${totalGebyr.toFixed(2)} kr.`;
+    const gennemsnitGenanvendelighed = totalGenanvendelighed / totalVægt;
+    let samletNiveau = "";
+
+    if (gennemsnitGenanvendelighed > 70) {
+      samletNiveau = "Grøn";
+    } else if (gennemsnitGenanvendelighed >= 40) {
+      samletNiveau = "Gul";
+    } else {
+      samletNiveau = "Rød";
     }
-  </script>
+
+    document.getElementById("resultat").innerText = `
+        Produktet placeres i ${samletNiveau} niveau.
+        Total vægt: ${totalVægt.toFixed(2)} kg.
+        Total gebyr: ${totalGebyr.toFixed(2)} kr.
+        Gennemsnitlig genanvendelighed: ${gennemsnitGenanvendelighed.toFixed(2)}%.
+      `;
+  }
+</script>
 </body>
 </html>
