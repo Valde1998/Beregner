@@ -73,8 +73,8 @@
       const vægt = parseFloat(materiale.querySelector(".vægt").value);
       let gebyrPerKg = 0;
 
-      // Bestem niveau og gebyr pr. kg
-      if (genanvendelighed > 70) {
+
+      if (genanvendelighed > 74) {
         gebyrPerKg = 1; // Grøn
       } else if (genanvendelighed >= 40) {
         gebyrPerKg = 5; // Gul
@@ -90,7 +90,7 @@
     const gennemsnitGenanvendelighed = totalGenanvendelighed / totalVægt;
     let samletNiveau = "";
 
-    if (gennemsnitGenanvendelighed > 70) {
+    if (gennemsnitGenanvendelighed > 74) {
       samletNiveau = "Grøn";
     } else if (gennemsnitGenanvendelighed >= 40) {
       samletNiveau = "Gul";
