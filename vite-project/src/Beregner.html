@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Beregner</title>
+</head>
+<body>
+<form>
+  <label for="produkt-valg">Vælg produkt:</label>
+  <select id="produkt-valg" onchange="opdaterVærdier()">
+    <option value="pumpe">Pumpe</option>
+    <option value="produkt1">Produkt 1</option>
+    <option value="produkt2">Produkt 2</option>
+  </select>
+  <br>
+  <label for="antal">Antal:</label>
+  <input type="number" id="antal" min="1" value="1" onchange="opdaterVærdier()" required>
+  <br>
+  <div>
+    <span>1 produkt = 10g</span><br>
+    <span>PP: 73.02%</span><br>
+    <span>PE: 15.07%</span><br>
+    <span>Metal: 11.32%</span><br>
+    <span>Glas: 0.58%</span>
+  </div>
+  <br>
+  <label for="vægt">Vægt (kg):</label>
+  <input type="number" id="vægt" min="0" required>
+  <br>
+  <label for="pris-pp">Pris for PP (kr):</label>
+  <input type="number" id="pris-pp" min="0" readonly>
+  <br>
+  <label for="pris-pe">Pris for PE (kr):</label>
+  <input type="number" id="pris-pe" min="0" readonly>
+  <br>
+  <label for="pris-metal">Pris for Metal (kr):</label>
+  <input type="number" id="pris-metal" min="0" readonly>
+  <br>
+  <label for="pris-glas">Pris for Glas (kr):</label>
+  <input type="number" id="pris-glas" min="0" readonly>
+  <br>
+  <label for="pris">Samlet Pris (kr):</label>
+  <input type="number" id="pris" min="0" readonly>
+  <br><br>
+</form>
+
+<script>
+  const priser = {
+    pumpe: { vægt: 0.01, pp: 7.302, pe: 1.507, metal: 1.132, glas: 0.058, pris: 0 },
+    produkt1: { vægt: 0.02, pp: 60.00, pe: 20.00, metal: 15.00, glas: 5.00, pris: 100 },
+    produkt2: { vægt: 0.03, pp: 50.00, pe: 25.00, metal: 20.00, glas: 5.00, pris: 150 }
+  };
+
+  const bearbejdningsPriser = {
+    pp: 0.004,
+    pe: 0.004,
+    metal: 0.001,
+    glas: 0.002
+  };
+
+  function opdaterVærdier() {
+    const produktValg = document.getElementById("produkt-valg").value;
+    const antal = parseInt(document.getElementById("antal").value);
+    const vægtInput = document.getElementById("vægt");
+    const prisPPInput = document.getElementById("pris-pp");
+    const prisPEInput = document.getElementById("pris-pe");
+    const prisMetalInput = document.getElementById("pris-metal");
+    const prisGlasInput = document.getElementById("pris-glas");
+    const prisInput = document.getElementById("pris");
+
+    const produkt = priser[produktValg];
+
+    vægtInput.value = (produkt.vægt * antal).toFixed(3);
+
+    const prisPP = (produkt.pp * bearbejdningsPriser.pp * antal).toFixed(2);
+    const prisPE = (produkt.pe * bearbejdningsPriser.pe * antal).toFixed(2);
+    const prisMetal = (produkt.metal * bearbejdningsPriser.metal * antal).toFixed(2);
+    const prisGlas = (produkt.glas * bearbejdningsPriser.glas * antal).toFixed(2);
+    const totalPris = (parseFloat(prisPP) + parseFloat(prisPE) + parseFloat(prisMetal) + parseFloat(prisGlas)).toFixed(2);
+
+    prisPPInput.value = prisPP;
+    prisPEInput.value = prisPE;
+    prisMetalInput.value = prisMetal;
+    prisGlasInput.value = prisGlas;
+    prisInput.value = totalPris;
+  }
+</script>
+</body>
+</html>
