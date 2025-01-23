@@ -42,31 +42,31 @@
   <br>
   <div id="materiale-info-pumpe" style="display: none;">
     <span>1 produkt = 10g</span><br>
-    <span>PP: 73.02%</span><br>
-    <span>PE: 15.07%</span><br>
-    <span>Metal: 11.32%</span><br>
-    <span>Glas: 0.58%</span>
+    <label>PP: <input type="number" id="pp-pumpe" value="73.02" onchange="opdaterVærdier()"></label><br>
+    <label>PE: <input type="number" id="pe-pumpe" value="15.07" onchange="opdaterVærdier()"></label><br>
+    <label>Metal: <input type="number" id="metal-pumpe" value="11.32" onchange="opdaterVærdier()"></label><br>
+    <label>Glas: <input type="number" id="glas-pumpe" value="0.58" onchange="opdaterVærdier()"></label>
   </div>
   <div id="materiale-info-airless-dispenser" style="display: none;">
     <span>1 produkt = 10g</span><br>
-    <span>PP: 73.02%</span><br>
-    <span>PE: 15.07%</span><br>
-    <span>Metal: 11.32%</span><br>
-    <span>Glas: 0.58%</span>
+    <label>PP: <input type="number" id="pp-airless-dispenser" value="73.02" onchange="opdaterVærdier()"></label><br>
+    <label>PE: <input type="number" id="pe-airless-dispenser" value="15.07" onchange="opdaterVærdier()"></label><br>
+    <label>Metal: <input type="number" id="metal-airless-dispenser" value="11.32" onchange="opdaterVærdier()"></label><br>
+    <label>Glas: <input type="number" id="glas-airless-dispenser" value="0.58" onchange="opdaterVærdier()"></label>
   </div>
   <div id="materiale-info-bambus" style="display: none;">
     <span>1 produkt = 20g</span><br>
-    <span>PP: 60.00%</span><br>
-    <span>PE: 20.00%</span><br>
-    <span>Metal: 15.00%</span><br>
-    <span>Glas: 5.00%</span>
+    <label>PP: <input type="number" id="pp-bambus" value="60.00" onchange="opdaterVærdier()"></label><br>
+    <label>PE: <input type="number" id="pe-bambus" value="20.00" onchange="opdaterVærdier()"></label><br>
+    <label>Metal: <input type="number" id="metal-bambus" value="15.00" onchange="opdaterVærdier()"></label><br>
+    <label>Glas: <input type="number" id="glas-bambus" value="5.00" onchange="opdaterVærdier()"></label>
   </div>
   <div id="materiale-info-creme-krukke" style="display: none;">
     <span>1 produkt = 30g</span><br>
-    <span>PP: 50.00%</span><br>
-    <span>PE: 25.00%</span><br>
-    <span>Metal: 20.00%</span><br>
-    <span>Glas: 5.00%</span>
+    <label>PP: <input type="number" id="pp-creme-krukke" value="50.00" onchange="opdaterVærdier()"></label><br>
+    <label>PE: <input type="number" id="pe-creme-krukke" value="25.00" onchange="opdaterVærdier()"></label><br>
+    <label>Metal: <input type="number" id="metal-creme-krukke" value="20.00" onchange="opdaterVærdier()"></label><br>
+    <label>Glas: <input type="number" id="glas-creme-krukke" value="5.00" onchange="opdaterVærdier()"></label>
   </div>
   <!-- Tilføj flere divs for de andre produkter her -->
   <br>
@@ -92,10 +92,10 @@
 
 <script>
   const priser = {
-    pumpe: { vægt: 0.01, pp: 7.302, pe: 1.507, metal: 1.132, glas: 0.058},
-    "airless-dispenser": { vægt: 0.01, pp: 7.302, pe: 1.507, metal: 1.132, glas: 0.058},
-    bambus: { vægt: 0.02, pp: 60.00, pe: 20.00, metal: 15.00, glas: 5.00},
-    "creme-krukke": { vægt: 0.03, pp: 50.00, pe: 25.00, metal: 20.00, glas: 5.00},
+    pumpe: { vægt: 0.01, pp: 73.02, pe: 15.07, metal: 11.32, glas: 0.58 },
+    "airless-dispenser": { vægt: 0.01, pp: 73.02, pe: 15.07, metal: 11.32, glas: 0.58 },
+    bambus: { vægt: 0.02, pp: 60.00, pe: 20.00, metal: 15.00, glas: 5.00 },
+    "creme-krukke": { vægt: 0.03, pp: 50.00, pe: 25.00, metal: 20.00, glas: 5.00 },
     // Tilføj flere produkter her
   };
 
@@ -126,12 +126,17 @@
 
     const produkt = priser[produktValg];
 
+    const ppProcent = parseFloat(document.getElementById(`pp-${produktValg}`).value) / 10;
+    const peProcent = parseFloat(document.getElementById(`pe-${produktValg}`).value) / 10;
+    const metalProcent = parseFloat(document.getElementById(`metal-${produktValg}`).value) / 10;
+    const glasProcent = parseFloat(document.getElementById(`glas-${produktValg}`).value) / 10;
+
     vægtInput.value = (produkt.vægt * antal).toFixed(3);
 
-    const prisPP = (produkt.pp * bearbejdningsPriser.pp * antal).toFixed(2);
-    const prisPE = (produkt.pe * bearbejdningsPriser.pe * antal).toFixed(2);
-    const prisMetal = (produkt.metal * bearbejdningsPriser.metal * antal).toFixed(2);
-    const prisGlas = (produkt.glas * bearbejdningsPriser.glas * antal).toFixed(2);
+    const prisPP = (ppProcent * bearbejdningsPriser.pp * antal).toFixed(2);
+    const prisPE = (peProcent * bearbejdningsPriser.pe * antal).toFixed(2);
+    const prisMetal = (metalProcent * bearbejdningsPriser.metal * antal).toFixed(2);
+    const prisGlas = (glasProcent * bearbejdningsPriser.glas * antal).toFixed(2);
     const totalPris = (parseFloat(prisPP) + parseFloat(prisPE) + parseFloat(prisMetal) + parseFloat(prisGlas)).toFixed(2);
 
     prisPPInput.value = prisPP;
