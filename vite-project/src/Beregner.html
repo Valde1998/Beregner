@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Beregner</title>
+  <link rel="stylesheet" href="style2.css">
 </head>
 <body>
 <form>
@@ -10,8 +11,30 @@
   <select id="produkt-valg" onchange="opdaterVærdier()">
     <option value="">Vælg et produkt</option>
     <option value="pumpe">Pumpe</option>
-    <option value="produkt1">Produkt 1</option>
-    <option value="produkt2">Produkt 2</option>
+    <option value="airless-dispenser">Airless dispenser</option>
+    <option value="bambus">Bambus</option>
+    <option value="creme-krukke">Creme krukke</option>
+    <option value="creme-pumpe">Creme pumpe</option>
+    <option value="deo-roll-on">Deo roll-on</option>
+    <option value="emballage-sæt">Emballage sæt</option>
+    <option value="glasemballage">Glasemballage</option>
+    <option value="kapsler">Kapsler</option>
+    <option value="lotion-pumpe">Lotion pumpe</option>
+    <option value="make-up-emballage">Make-up emballage</option>
+    <option value="make-up-fjerner-pumpe">Make-up fjerner pumpe</option>
+    <option value="mist-sprayer">Mist sprayer</option>
+    <option value="parfume-forstøver">Parfume forstøver</option>
+    <option value="pet-flaske">PET flaske</option>
+    <option value="pet-krukke">PET krukke</option>
+    <option value="pharma-emballage">Pharma emballage</option>
+    <option value="pipette-flaske">Pipette flaske</option>
+    <option value="pp-pe-flaske">PP & PE flaske</option>
+    <option value="premium-emballage">Premium emballage</option>
+    <option value="skumpumpe">Skumpumpe</option>
+    <option value="spande">Spande</option>
+    <option value="sprayflaske">Sprayflaske</option>
+    <option value="trigger-sprayer">Trigger sprayer</option>
+    <option value="tube">Tube</option>
   </select>
   <br>
   <label for="antal">Antal:</label>
@@ -24,20 +47,28 @@
     <span>Metal: 11.32%</span><br>
     <span>Glas: 0.58%</span>
   </div>
-  <div id="materiale-info-produkt1" style="display: none;">
+  <div id="materiale-info-airless-dispenser" style="display: none;">
+    <span>1 produkt = 10g</span><br>
+    <span>PP: 73.02%</span><br>
+    <span>PE: 15.07%</span><br>
+    <span>Metal: 11.32%</span><br>
+    <span>Glas: 0.58%</span>
+  </div>
+  <div id="materiale-info-bambus" style="display: none;">
     <span>1 produkt = 20g</span><br>
     <span>PP: 60.00%</span><br>
     <span>PE: 20.00%</span><br>
     <span>Metal: 15.00%</span><br>
     <span>Glas: 5.00%</span>
   </div>
-  <div id="materiale-info-produkt2" style="display: none;">
+  <div id="materiale-info-creme-krukke" style="display: none;">
     <span>1 produkt = 30g</span><br>
     <span>PP: 50.00%</span><br>
     <span>PE: 25.00%</span><br>
     <span>Metal: 20.00%</span><br>
     <span>Glas: 5.00%</span>
   </div>
+  <!-- Tilføj flere divs for de andre produkter her -->
   <br>
   <label for="vægt">Vægt (kg):</label>
   <input type="number" id="vægt" min="0" readonly>
@@ -61,9 +92,11 @@
 
 <script>
   const priser = {
-    pumpe: { vægt: 0.01, pp: 7.302, pe: 1.507, metal: 1.132, glas: 0.058 },
-    produkt1: { vægt: 0.02, pp: 60.00, pe: 20.00, metal: 15.00, glas: 5.00 },
-    produkt2: { vægt: 0.03, pp: 50.00, pe: 25.00, metal: 20.00, glas: 5.00 }
+    pumpe: { vægt: 0.01, pp: 7.302, pe: 1.507, metal: 1.132, glas: 0.058},
+    "airless-dispenser": { vægt: 0.01, pp: 7.302, pe: 1.507, metal: 1.132, glas: 0.058},
+    bambus: { vægt: 0.02, pp: 60.00, pe: 20.00, metal: 15.00, glas: 5.00},
+    "creme-krukke": { vægt: 0.03, pp: 50.00, pe: 25.00, metal: 20.00, glas: 5.00},
+    // Tilføj flere produkter her
   };
 
   const bearbejdningsPriser = {
@@ -82,20 +115,13 @@
     const prisMetalInput = document.getElementById("pris-metal");
     const prisGlasInput = document.getElementById("pris-glas");
     const prisInput = document.getElementById("pris");
-    const materialeInfoPumpe = document.getElementById("materiale-info-pumpe");
-    const materialeInfoProdukt1 = document.getElementById("materiale-info-produkt1");
-    const materialeInfoProdukt2 = document.getElementById("materiale-info-produkt2");
 
-    materialeInfoPumpe.style.display = "none";
-    materialeInfoProdukt1.style.display = "none";
-    materialeInfoProdukt2.style.display = "none";
+    // Skjul alle materiale-info divs
+    document.querySelectorAll('[id^="materiale-info"]').forEach(div => div.style.display = "none");
 
-    if (produktValg === "pumpe") {
-      materialeInfoPumpe.style.display = "block";
-    } else if (produktValg === "produkt1") {
-      materialeInfoProdukt1.style.display = "block";
-    } else if (produktValg === "produkt2") {
-      materialeInfoProdukt2.style.display = "block";
+    // Vis den relevante materiale-info div
+    if (produktValg) {
+      document.getElementById(`materiale-info-${produktValg}`).style.display = "block";
     }
 
     const produkt = priser[produktValg];
