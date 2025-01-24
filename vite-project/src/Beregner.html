@@ -42,13 +42,14 @@
       <label for="antal-1">Antal:</label>
       <input type="number" id="antal-1" class="antal" min="1" value="1" onchange="opdaterVærdier()" required>
       <br>
-      <img class="produkt-gif" src="" alt="Produkt GIF" style="display: none;">
+      <img class="produkt-gif" src="" alt="Produkt GIF" style="width: 100px; height: auto; display: none;">
       <div id="materiale-info-1" class="materiale-info" style="display: none;">
         <span>1 produkt = 10g</span><br>
         <label>PP: <input type="number" class="pp" value="73.02" onchange="opdaterVærdier()"></label><br>
         <label>PE: <input type="number" class="pe" value="15.07" onchange="opdaterVærdier()"></label><br>
         <label>Metal: <input type="number" class="metal" value="11.32" onchange="opdaterVærdier()"></label><br>
-        <label>Glas: <input type="number" class="glas" value="0.58" onchange="opdaterVærdier()"></label><br>
+        <label>Glas: <input type="number" class="glas" value="0.58" onchange="opdaterVærdier()"></label>
+        <br>
         <label>Pris for PP (kr): <input type="number" class="pris-pp" readonly></label><br>
         <label>Pris for PE (kr): <input type="number" class="pris-pe" readonly></label><br>
         <label>Pris for Metal (kr): <input type="number" class="pris-metal" readonly></label><br>
@@ -79,14 +80,6 @@
     pe: 0.004,
     metal: 0.001,
     glas: 0.002
-  };
-
-  const produktGifs = {
-    pumpe: "path/to/pumpe.gif",
-    "airless-dispenser": "path/to/airless-dispenser.gif",
-    bambus: "path/to/bambus.gif",
-    "creme-krukke": "path/to/creme-krukke.gif",
-    // Tilføj flere produkter her
   };
 
   function tilføjProdukt() {
@@ -129,13 +122,14 @@
       <label for="antal-${produktCount}">Antal:</label>
       <input type="number" id="antal-${produktCount}" class="antal" min="1" value="1" onchange="opdaterVærdier()" required>
       <br>
-      <img class="produkt-gif" src="" alt="Produkt GIF" style="display: none;">
+      <img class="produkt-gif" src="" alt="Produkt GIF" style="width: 100px; height: auto; display: none;">
       <div id="materiale-info-${produktCount}" class="materiale-info" style="display: none;">
         <span>1 produkt = 10g</span><br>
         <label>PP: <input type="number" class="pp" value="73.02" onchange="opdaterVærdier()"></label><br>
         <label>PE: <input type="number" class="pe" value="15.07" onchange="opdaterVærdier()"></label><br>
         <label>Metal: <input type="number" class="metal" value="11.32" onchange="opdaterVærdier()"></label><br>
-        <label>Glas: <input type="number" class="glas" value="0.58" onchange="opdaterVærdier()"></label><br>
+        <label>Glas: <input type="number" class="glas" value="0.58" onchange="opdaterVærdier()"></label>
+        <br>
         <label>Pris for PP (kr): <input type="number" class="pris-pp" readonly></label><br>
         <label>Pris for PE (kr): <input type="number" class="pris-pe" readonly></label><br>
         <label>Pris for Metal (kr): <input type="number" class="pris-metal" readonly></label><br>
@@ -157,7 +151,7 @@
 
       if (produktValg) {
         materialeInfo.style.display = "block";
-        produktGif.src = produktGifs[produktValg];
+        produktGif.src = `produkter/${produktValg}.gif`;
         produktGif.style.display = "block";
       } else {
         materialeInfo.style.display = "none";
