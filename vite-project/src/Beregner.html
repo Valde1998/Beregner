@@ -40,6 +40,7 @@
   <label for="antal">Antal:</label>
   <input type="number" id="antal" min="1" value="1" onchange="opdaterVærdier()" required>
   <br>
+  <img id="produkt-gif" src="" alt="Produkt GIF" style="width: 100px; height: auto; display: none;">
   <div id="materiale-info-pumpe" style="display: none;">
     <span>1 produkt = 10g</span><br>
     <label>PP: <input type="number" id="pp-pumpe" value="73.02" onchange="opdaterVærdier()"></label><br>
@@ -115,13 +116,18 @@
     const prisMetalInput = document.getElementById("pris-metal");
     const prisGlasInput = document.getElementById("pris-glas");
     const prisInput = document.getElementById("pris");
+    const produktGif = document.getElementById("produkt-gif");
 
     // Skjul alle materiale-info divs
     document.querySelectorAll('[id^="materiale-info"]').forEach(div => div.style.display = "none");
 
-    // Vis den relevante materiale-info div
+    // Vis den relevante materiale-info div og GIF
     if (produktValg) {
       document.getElementById(`materiale-info-${produktValg}`).style.display = "block";
+      produktGif.src = `produkter/${produktValg}.gif`;
+      produktGif.style.display = "block";
+    } else {
+      produktGif.style.display = "none";
     }
 
     const produkt = priser[produktValg];
