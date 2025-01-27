@@ -76,10 +76,10 @@
   };
 
   const bearbejdningsPriser = {
-    pp: 0.004,
-    pe: 0.004,
-    metal: 0.001,
-    glas: 0.002
+    pp: 0.04,
+    pe: 0.04,
+    metal: 0.01,
+    glas: 0.02
   };
 
   function tilføjProdukt() {
@@ -159,24 +159,29 @@
       }
 
       const produkt = priser[produktValg];
+      if (!produkt) {
+        console.error("Produkt ikke fundet:", produktValg);
+        return;
+      }
 
-      const ppProcent = parseFloat(produktDiv.querySelector(".pp").value) / 10;
-      const peProcent = parseFloat(produktDiv.querySelector(".pe").value) / 10;
-      const metalProcent = parseFloat(produktDiv.querySelector(".metal").value) / 10;
-      const glasProcent = parseFloat(produktDiv.querySelector(".glas").value) / 10;
+      const ppProcent = parseFloat(produktDiv.querySelector(".pp").value);
+      const peProcent = parseFloat(produktDiv.querySelector(".pe").value);
+      const metalProcent = parseFloat(produktDiv.querySelector(".metal").value);
+      const glasProcent = parseFloat(produktDiv.querySelector(".glas").value) ;
 
-      const prisPP = ppProcent * bearbejdningsPriser.pp * antal;
-      const prisPE = peProcent * bearbejdningsPriser.pe * antal;
-      const prisMetal = metalProcent * bearbejdningsPriser.metal * antal;
-      const prisGlas = glasProcent * bearbejdningsPriser.glas * antal;
-      const totalPris = prisPP + prisPE + prisMetal + prisGlas;
+      const totalVægt = produkt.vægt * antal;
+      const prisPP = (ppProcent * bearbejdningsPriser.pp * totalVægt).toFixed(2);
+      const prisPE = (peProcent * bearbejdningsPriser.pe * totalVægt).toFixed(2);
+      const prisMetal = (metalProcent * bearbejdningsPriser.metal * totalVægt).toFixed(2);
+      const prisGlas = (glasProcent * bearbejdningsPriser.glas * totalVægt).toFixed(2);
+      const totalPris = (parseFloat(prisPP) + parseFloat(prisPE) + parseFloat(prisMetal) + parseFloat(prisGlas)).toFixed(2);
 
-      produktDiv.querySelector(".pris-pp").value = prisPP.toFixed(2);
-      produktDiv.querySelector(".pris-pe").value = prisPE.toFixed(2);
-      produktDiv.querySelector(".pris-metal").value = prisMetal.toFixed(2);
-      produktDiv.querySelector(".pris-glas").value = prisGlas.toFixed(2);
+      produktDiv.querySelector(".pris-pp").value = prisPP;
+      produktDiv.querySelector(".pris-pe").value = prisPE;
+      produktDiv.querySelector(".pris-metal").value = prisMetal;
+      produktDiv.querySelector(".pris-glas").value = prisGlas;
 
-      samletPris += totalPris;
+      samletPris += parseFloat(totalPris);
     });
 
     document.getElementById("samlet-pris").value = samletPris.toFixed(2);
