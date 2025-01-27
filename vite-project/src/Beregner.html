@@ -53,7 +53,8 @@
         <label>Pris for PP (kr): <input type="number" class="pris-pp" readonly></label><br>
         <label>Pris for PE (kr): <input type="number" class="pris-pe" readonly></label><br>
         <label>Pris for Metal (kr): <input type="number" class="pris-metal" readonly></label><br>
-        <label>Pris for Glas (kr): <input type="number" class="pris-glas" readonly></label>
+        <label>Pris for Glas (kr): <input type="number" class="pris-glas" readonly></label><br>
+        <label>Total Vægt (kg): <input type="number" class="total-vægt" readonly></label>
       </div>
     </div>
   </div>
@@ -133,7 +134,8 @@
         <label>Pris for PP (kr): <input type="number" class="pris-pp" readonly></label><br>
         <label>Pris for PE (kr): <input type="number" class="pris-pe" readonly></label><br>
         <label>Pris for Metal (kr): <input type="number" class="pris-metal" readonly></label><br>
-        <label>Pris for Glas (kr): <input type="number" class="pris-glas" readonly></label>
+        <label>Pris for Glas (kr): <input type="number" class="pris-glas" readonly></label><br>
+        <label>Total Vægt (kg): <input type="number" class="total-vægt" readonly></label>
       </div>
     `;
     container.appendChild(produktDiv);
@@ -167,7 +169,7 @@
       const ppProcent = parseFloat(produktDiv.querySelector(".pp").value);
       const peProcent = parseFloat(produktDiv.querySelector(".pe").value);
       const metalProcent = parseFloat(produktDiv.querySelector(".metal").value);
-      const glasProcent = parseFloat(produktDiv.querySelector(".glas").value) ;
+      const glasProcent = parseFloat(produktDiv.querySelector(".glas").value);
 
       const totalVægt = produkt.vægt * antal;
       const prisPP = (ppProcent * bearbejdningsPriser.pp * totalVægt).toFixed(2);
@@ -180,6 +182,7 @@
       produktDiv.querySelector(".pris-pe").value = prisPE;
       produktDiv.querySelector(".pris-metal").value = prisMetal;
       produktDiv.querySelector(".pris-glas").value = prisGlas;
+      produktDiv.querySelector(".total-vægt").value = totalVægt.toFixed(2); // Display in kilograms
 
       samletPris += parseFloat(totalPris);
     });
