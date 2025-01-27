@@ -101,10 +101,10 @@
   };
 
   const bearbejdningsPriser = {
-    pp: 0.004,
-    pe: 0.004,
-    metal: 0.001,
-    glas: 0.002
+    pp: 0.04,
+    pe: 0.04,
+    metal: 0.01,
+    glas: 0.02
   };
 
   function opdaterVærdier() {
@@ -132,10 +132,10 @@
 
     const produkt = priser[produktValg];
 
-    const ppProcent = parseFloat(document.getElementById(`pp-${produktValg}`).value) / 10;
-    const peProcent = parseFloat(document.getElementById(`pe-${produktValg}`).value) / 10;
-    const metalProcent = parseFloat(document.getElementById(`metal-${produktValg}`).value) / 10;
-    const glasProcent = parseFloat(document.getElementById(`glas-${produktValg}`).value) / 10;
+    const ppProcent = parseFloat(document.getElementById(`pp-${produktValg}`).value) / 100;
+    const peProcent = parseFloat(document.getElementById(`pe-${produktValg}`).value) / 100;
+    const metalProcent = parseFloat(document.getElementById(`metal-${produktValg}`).value) / 100;
+    const glasProcent = parseFloat(document.getElementById(`glas-${produktValg}`).value) / 100;
 
     vægtInput.value = (produkt.vægt * antal).toFixed(3);
 
