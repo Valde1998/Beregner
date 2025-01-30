@@ -43,14 +43,13 @@
       <input type="number" id="antal-1" class="antal" min="1" value="1" onchange="opdaterVærdier()" required>
       <br>
       <label for="vægt-1">Vægt (g):</label>
-      <input type="number" id="vægt-1" class="vægt" min="0" step="0.001" value="10" onchange="opdaterVærdier()" required>
-      <br>
+      <input type="number" id="vægt-1" class="vægt" min="0" step="0.001" value="15" onchange="opdaterVærdier()" required readonly>      <br>
       <img class="produkt-gif" src="" alt="Produkt GIF" style="width: 100px; height: auto; display: none;">
       <div id="materiale-info-1" class="materiale-info" style="display: none;">
-        <label>PP (g): <input type="number" class="pp-gram" value="7.302" onchange="opdaterVærdier()"></label><br>
-        <label>PE (g): <input type="number" class="pe-gram" value="1.507" onchange="opdaterVærdier()"></label><br>
-        <label>Metal (g): <input type="number" class="metal-gram" value="1.132" onchange="opdaterVærdier()"></label><br>
-        <label>Glas (g): <input type="number" class="glas-gram" value="0.058" onchange="opdaterVærdier()"></label>
+        <label>PP (g): <input type="number" class="pp-gram" value="10.95" onchange="opdaterVærdier()"></label><br>
+        <label>PE (g): <input type="number" class="pe-gram" value="2.26" onchange="opdaterVærdier()"></label><br>
+        <label>Metal (g): <input type="number" class="metal-gram" value="1.70" onchange="opdaterVærdier()"></label><br>
+        <label>Glas (g): <input type="number" class="glas-gram" value="0.09" onchange="opdaterVærdier()"></label>
         <br>
         <label>Pris for PP (kr): <input type="number" class="pris-pp" readonly></label><br>
         <label>Pris for PE (kr): <input type="number" class="pris-pe" readonly></label><br>
@@ -121,14 +120,13 @@
       <input type="number" id="antal-${produktCount}" class="antal" min="1" value="1" onchange="opdaterVærdier()" required>
       <br>
       <label for="vægt-${produktCount}">Vægt (g):</label>
-      <input type="number" id="vægt-${produktCount}" class="vægt" min="0" step="0.001" value="10" onchange="opdaterVærdier()" required>
-      <br>
+<input type="number" id="vægt-${produktCount}" class="vægt" min="0" step="0.001" value="15" onchange="opdaterVærdier()" required readonly>      <br>
       <img class="produkt-gif" src="" alt="Produkt GIF" style="width: 100px; height: auto; display: none;">
       <div id="materiale-info-${produktCount}" class="materiale-info" style="display: none;">
-        <label>PP (g): <input type="number" class="pp-gram" value="7.302" onchange="opdaterVærdier()"></label><br>
-        <label>PE (g): <input type="number" class="pe-gram" value="1.507" onchange="opdaterVærdier()"></label><br>
-        <label>Metal (g): <input type="number" class="metal-gram" value="1.132" onchange="opdaterVærdier()"></label><br>
-        <label>Glas (g): <input type="number" class="glas-gram" value="0.058" onchange="opdaterVærdier()"></label>
+        <label>PP (g): <input type="number" class="pp-gram" value="10.95" onchange="opdaterVærdier()"></label><br>
+        <label>PE (g): <input type="number" class="pe-gram" value="2.26" onchange="opdaterVærdier()"></label><br>
+        <label>Metal (g): <input type="number" class="metal-gram" value="1.70" onchange="opdaterVærdier()"></label><br>
+        <label>Glas (g): <input type="number" class="glas-gram" value="0.09" onchange="opdaterVærdier()"></label>
         <br>
         <label>Pris for PP (kr): <input type="number" class="pris-pp" readonly></label><br>
         <label>Pris for PE (kr): <input type="number" class="pris-pe" readonly></label><br>
@@ -162,10 +160,19 @@
         produktGif.style.display = "none";
       }
 
-      const ppGram = parseFloat(produktDiv.querySelector(".pp-gram").value);
-      const peGram = parseFloat(produktDiv.querySelector(".pe-gram").value);
-      const metalGram = parseFloat(produktDiv.querySelector(".metal-gram").value);
-      const glasGram = parseFloat(produktDiv.querySelector(".glas-gram").value);
+      let ppGram, peGram, metalGram, glasGram;
+
+      if (produktValg === "pumpe") {
+        ppGram = 7.302;
+        peGram = 1.507;
+        metalGram = 1.132;
+        glasGram = 0.058;
+      } else {
+        ppGram = parseFloat(produktDiv.querySelector(".pp-gram").value);
+        peGram = parseFloat(produktDiv.querySelector(".pe-gram").value);
+        metalGram = parseFloat(produktDiv.querySelector(".metal-gram").value);
+        glasGram = parseFloat(produktDiv.querySelector(".glas-gram").value);
+      }
 
       // Beregn prisen for hvert materiale
       const prisPP = (ppGram * bearbejdningsPriser.pp * antal).toFixed(2);
