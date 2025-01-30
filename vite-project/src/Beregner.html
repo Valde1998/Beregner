@@ -6,99 +6,69 @@
   <link rel="stylesheet" href="style2.css">
 </head>
 <body>
-<form>
-  <label for="produkt-valg">Vælg produkt:</label>
-  <select id="produkt-valg" onchange="opdaterVærdier()">
-    <option value="">Vælg et produkt</option>
-    <option value="pumpe">Pumpe</option>
-    <option value="airless-dispenser">Airless dispenser</option>
-    <option value="bambus">Bambus</option>
-    <option value="creme-krukke">Creme krukke</option>
-    <option value="creme-pumpe">Creme pumpe</option>
-    <option value="deo-roll-on">Deo roll-on</option>
-    <option value="emballage-sæt">Emballage sæt</option>
-    <option value="glasemballage">Glasemballage</option>
-    <option value="kapsler">Kapsler</option>
-    <option value="lotion-pumpe">Lotion pumpe</option>
-    <option value="make-up-emballage">Make-up emballage</option>
-    <option value="make-up-fjerner-pumpe">Make-up fjerner pumpe</option>
-    <option value="mist-sprayer">Mist sprayer</option>
-    <option value="parfume-forstøver">Parfume forstøver</option>
-    <option value="pet-flaske">PET flaske</option>
-    <option value="pet-krukke">PET krukke</option>
-    <option value="pharma-emballage">Pharma emballage</option>
-    <option value="pipette-flaske">Pipette flaske</option>
-    <option value="pp-pe-flaske">PP & PE flaske</option>
-    <option value="premium-emballage">Premium emballage</option>
-    <option value="skumpumpe">Skumpumpe</option>
-    <option value="spande">Spande</option>
-    <option value="sprayflaske">Sprayflaske</option>
-    <option value="trigger-sprayer">Trigger sprayer</option>
-    <option value="tube">Tube</option>
-  </select>
-  <br>
-  <label for="antal">Antal:</label>
-  <input type="number" id="antal" min="1" value="1" onchange="opdaterVærdier()" required>
-  <br>
-  <img id="produkt-gif" src="" alt="Produkt GIF" style="width: 100px; height: auto; display: none;">
-  <div id="materiale-info-pumpe" style="display: none;">
-    <span>1 produkt = 10g</span><br>
-    <label>PP: <input type="number" id="pp-pumpe" value="73.02" onchange="opdaterVærdier()"></label><br>
-    <label>PE: <input type="number" id="pe-pumpe" value="15.07" onchange="opdaterVærdier()"></label><br>
-    <label>Metal: <input type="number" id="metal-pumpe" value="11.32" onchange="opdaterVærdier()"></label><br>
-    <label>Glas: <input type="number" id="glas-pumpe" value="0.58" onchange="opdaterVærdier()"></label>
+<form id="produkt-form">
+  <div id="produkt-container">
+    <div class="produkt">
+      <label for="produkt-valg-1">Vælg produkt:</label>
+      <select id="produkt-valg-1" class="produkt-valg" onchange="opdaterVærdier()">
+        <option value="">Vælg et produkt</option>
+        <option value="pumpe">Pumpe</option>
+        <option value="airless-dispenser">Airless dispenser</option>
+        <option value="bambus">Bambus</option>
+        <option value="creme-krukke">Creme krukke</option>
+        <option value="creme-pumpe">Creme pumpe</option>
+        <option value="deo-roll-on">Deo roll-on</option>
+        <option value="emballage-sæt">Emballage sæt</option>
+        <option value="glasemballage">Glasemballage</option>
+        <option value="kapsler">Kapsler</option>
+        <option value="lotion-pumpe">Lotion pumpe</option>
+        <option value="make-up-emballage">Make-up emballage</option>
+        <option value="make-up-fjerner-pumpe">Make-up fjerner pumpe</option>
+        <option value="mist-sprayer">Mist sprayer</option>
+        <option value="parfume-forstøver">Parfume forstøver</option>
+        <option value="pet-flaske">PET flaske</option>
+        <option value="pet-krukke">PET krukke</option>
+        <option value="pharma-emballage">Pharma emballage</option>
+        <option value="pipette-flaske">Pipette flaske</option>
+        <option value="pp-pe-flaske">PP & PE flaske</option>
+        <option value="premium-emballage">Premium emballage</option>
+        <option value="skumpumpe">Skumpumpe</option>
+        <option value="spande">Spande</option>
+        <option value="sprayflaske">Sprayflaske</option>
+        <option value="trigger-sprayer">Trigger sprayer</option>
+        <option value="tube">Tube</option>
+      </select>
+      <br>
+      <label for="antal-1">Antal:</label>
+      <input type="number" id="antal-1" class="antal" min="1" value="1" onchange="opdaterVærdier()" required>
+      <br>
+      <img class="produkt-gif" src="" alt="Produkt GIF" style="width: 100px; height: auto; display: none;">
+      <div id="materiale-info-1" class="materiale-info" style="display: none;">
+        <label>PP (g): <input type="number" class="pp" value="0" onchange="opdaterVærdier()"></label><br>
+        <label>PE (g): <input type="number" class="pe" value="0" onchange="opdaterVærdier()"></label><br>
+        <label>Metal (g): <input type="number" class="metal" value="0" onchange="opdaterVærdier()"></label><br>
+        <label>Glas (g): <input type="number" class="glas" value="0" onchange="opdaterVærdier()"></label>
+        <br>
+        <label>Pris for PP (kr): <input type="number" class="pris-pp" readonly></label><br>
+        <label>Pris for PE (kr): <input type="number" class="pris-pe" readonly></label><br>
+        <label>Pris for Metal (kr): <input type="number" class="pris-metal" readonly></label><br>
+        <label>Pris for Glas (kr): <input type="number" class="pris-glas" readonly></label><br>
+        <label>Total Vægt (kg): <input type="number" class="total-vægt" readonly></label>
+      </div>
+    </div>
   </div>
-  <div id="materiale-info-airless-dispenser" style="display: none;">
-    <span>1 produkt = 10g</span><br>
-    <label>PP: <input type="number" id="pp-airless-dispenser" value="73.02" onchange="opdaterVærdier()"></label><br>
-    <label>PE: <input type="number" id="pe-airless-dispenser" value="15.07" onchange="opdaterVærdier()"></label><br>
-    <label>Metal: <input type="number" id="metal-airless-dispenser" value="11.32" onchange="opdaterVærdier()"></label><br>
-    <label>Glas: <input type="number" id="glas-airless-dispenser" value="0.58" onchange="opdaterVærdier()"></label>
-  </div>
-  <div id="materiale-info-bambus" style="display: none;">
-    <span>1 produkt = 20g</span><br>
-    <label>PP: <input type="number" id="pp-bambus" value="60.00" onchange="opdaterVærdier()"></label><br>
-    <label>PE: <input type="number" id="pe-bambus" value="20.00" onchange="opdaterVærdier()"></label><br>
-    <label>Metal: <input type="number" id="metal-bambus" value="15.00" onchange="opdaterVærdier()"></label><br>
-    <label>Glas: <input type="number" id="glas-bambus" value="5.00" onchange="opdaterVærdier()"></label>
-  </div>
-  <div id="materiale-info-creme-krukke" style="display: none;">
-    <span>1 produkt = 30g</span><br>
-    <label>PP: <input type="number" id="pp-creme-krukke" value="50.00" onchange="opdaterVærdier()"></label><br>
-    <label>PE: <input type="number" id="pe-creme-krukke" value="25.00" onchange="opdaterVærdier()"></label><br>
-    <label>Metal: <input type="number" id="metal-creme-krukke" value="20.00" onchange="opdaterVærdier()"></label><br>
-    <label>Glas: <input type="number" id="glas-creme-krukke" value="5.00" onchange="opdaterVærdier()"></label>
-  </div>
-  <!-- Tilføj flere divs for de andre produkter her -->
-  <br>
-  <label for="vægt">Vægt (kg):</label>
-  <input type="number" id="vægt" min="0" readonly>
-  <br>
-  <label for="pris-pp">Pris for PP (kr):</label>
-  <input type="number" id="pris-pp" min="0" readonly>
-  <br>
-  <label for="pris-pe">Pris for PE (kr):</label>
-  <input type="number" id="pris-pe" min="0" readonly>
-  <br>
-  <label for="pris-metal">Pris for Metal (kr):</label>
-  <input type="number" id="pris-metal" min="0" readonly>
-  <br>
-  <label for="pris-glas">Pris for Glas (kr):</label>
-  <input type="number" id="pris-glas" min="0" readonly>
-  <br>
-  <label for="pris">Samlet Pris (kr):</label>
-  <input type="number" id="pris" min="0" readonly>
+  <button type="button" onclick="tilføjProdukt()">Tilføj Produkt</button>
+  <br><br>
+  <label for="samlet-pris">Samlet Pris (kr):</label>
+  <input type="number" id="samlet-pris" min="0" readonly>
+  <br><br>
+  <label for="samlet-antal">Antal Produkter:</label>
+  <input type="number" id="samlet-antal" min="0" readonly>
   <br><br>
 </form>
 
 <script>
-  const priser = {
-    pumpe: { vægt: 0.01, pp: 73.02, pe: 15.07, metal: 11.32, glas: 0.58 },
-    "airless-dispenser": { vægt: 0.01, pp: 73.02, pe: 15.07, metal: 11.32, glas: 0.58 },
-    bambus: { vægt: 0.02, pp: 60.00, pe: 20.00, metal: 15.00, glas: 5.00 },
-    "creme-krukke": { vægt: 0.03, pp: 50.00, pe: 25.00, metal: 20.00, glas: 5.00 },
-    // Tilføj flere produkter her
-  };
+  let produktCount = 1;
 
   const bearbejdningsPriser = {
     pp: 0.04,
@@ -107,50 +77,109 @@
     glas: 0.02
   };
 
+  function tilføjProdukt() {
+    produktCount++;
+    const container = document.getElementById("produkt-container");
+
+    const produktDiv = document.createElement("div");
+    produktDiv.classList.add("produkt");
+    produktDiv.innerHTML = `
+      <label for="produkt-valg-${produktCount}">Vælg produkt:</label>
+      <select id="produkt-valg-${produktCount}" class="produkt-valg" onchange="opdaterVærdier()">
+        <option value="">Vælg et produkt</option>
+        <option value="pumpe">Pumpe</option>
+        <option value="airless-dispenser">Airless dispenser</option>
+        <option value="bambus">Bambus</option>
+        <option value="creme-krukke">Creme krukke</option>
+        <option value="creme-pumpe">Creme pumpe</option>
+        <option value="deo-roll-on">Deo roll-on</option>
+        <option value="emballage-sæt">Emballage sæt</option>
+        <option value="glasemballage">Glasemballage</option>
+        <option value="kapsler">Kapsler</option>
+        <option value="lotion-pumpe">Lotion pumpe</option>
+        <option value="make-up-emballage">Make-up emballage</option>
+        <option value="make-up-fjerner-pumpe">Make-up fjerner pumpe</option>
+        <option value="mist-sprayer">Mist sprayer</option>
+        <option value="parfume-forstøver">Parfume forstøver</option>
+        <option value="pet-flaske">PET flaske</option>
+        <option value="pet-krukke">PET krukke</option>
+        <option value="pharma-emballage">Pharma emballage</option>
+        <option value="pipette-flaske">Pipette flaske</option>
+        <option value="pp-pe-flaske">PP & PE flaske</option>
+        <option value="premium-emballage">Premium emballage</option>
+        <option value="skumpumpe">Skumpumpe</option>
+        <option value="spande">Spande</option>
+        <option value="sprayflaske">Sprayflaske</option>
+        <option value="trigger-sprayer">Trigger sprayer</option>
+        <option value="tube">Tube</option>
+      </select>
+      <br>
+      <label for="antal-${produktCount}">Antal:</label>
+      <input type="number" id="antal-${produktCount}" class="antal" min="1" value="1" onchange="opdaterVærdier()" required>
+      <br>
+      <img class="produkt-gif" src="" alt="Produkt GIF" style="width: 100px; height: auto; display: none;">
+      <div id="materiale-info-${produktCount}" class="materiale-info" style="display: none;">
+        <label>PP (g): <input type="number" class="pp" value="0" onchange="opdaterVærdier()"></label><br>
+        <label>PE (g): <input type="number" class="pe" value="0" onchange="opdaterVærdier()"></label><br>
+        <label>Metal (g): <input type="number" class="metal" value="0" onchange="opdaterVærdier()"></label><br>
+        <label>Glas (g): <input type="number" class="glas" value="0" onchange="opdaterVærdier()"></label>
+        <br>
+        <label>Pris for PP (kr): <input type="number" class="pris-pp" readonly></label><br>
+        <label>Pris for PE (kr): <input type="number" class="pris-pe" readonly></label><br>
+        <label>Pris for Metal (kr): <input type="number" class="pris-metal" readonly></label><br>
+        <label>Pris for Glas (kr): <input type="number" class="pris-glas" readonly></label><br>
+        <label>Total Vægt (kg): <input type="number" class="total-vægt" readonly></label>
+      </div>
+    `;
+    container.appendChild(produktDiv);
+  }
+
   function opdaterVærdier() {
-    const produktValg = document.getElementById("produkt-valg").value;
-    const antal = parseInt(document.getElementById("antal").value);
-    const vægtInput = document.getElementById("vægt");
-    const prisPPInput = document.getElementById("pris-pp");
-    const prisPEInput = document.getElementById("pris-pe");
-    const prisMetalInput = document.getElementById("pris-metal");
-    const prisGlasInput = document.getElementById("pris-glas");
-    const prisInput = document.getElementById("pris");
-    const produktGif = document.getElementById("produkt-gif");
+    const produkter = document.querySelectorAll(".produkt");
+    let samletPris = 0;
+    let samletAntal = 0;
 
-    // Skjul alle materiale-info divs
-    document.querySelectorAll('[id^="materiale-info"]').forEach(div => div.style.display = "none");
+    produkter.forEach((produktDiv, index) => {
+      const produktValg = produktDiv.querySelector(".produkt-valg").value;
+      const antal = parseInt(produktDiv.querySelector(".antal").value);
+      const materialeInfo = produktDiv.querySelector(".materiale-info");
+      const produktGif = produktDiv.querySelector(".produkt-gif");
 
-    // Vis den relevante materiale-info div og GIF
-    if (produktValg) {
-      document.getElementById(`materiale-info-${produktValg}`).style.display = "block";
-      produktGif.src = `produkter/${produktValg}.gif`;
-      produktGif.style.display = "block";
-    } else {
-      produktGif.style.display = "none";
-    }
+      if (produktValg) {
+        materialeInfo.style.display = "block";
+        produktGif.src = `produkter/${produktValg}.gif`;
+        produktGif.style.display = "block";
+        produktGif.style.width = "300px"; // Ændre bredden til 300px
+        produktGif.style.height = "auto"; // Bevar billedets proportioner
+      } else {
+        materialeInfo.style.display = "none";
+        produktGif.style.display = "none";
+      }
 
-    const produkt = priser[produktValg];
+      const ppGram = parseFloat(produktDiv.querySelector(".pp").value);
+      const peGram = parseFloat(produktDiv.querySelector(".pe").value);
+      const metalGram = parseFloat(produktDiv.querySelector(".metal").value);
+      const glasGram = parseFloat(produktDiv.querySelector(".glas").value);
 
-    const ppProcent = parseFloat(document.getElementById(`pp-${produktValg}`).value) ;
-    const peProcent = parseFloat(document.getElementById(`pe-${produktValg}`).value) ;
-    const metalProcent = parseFloat(document.getElementById(`metal-${produktValg}`).value);
-    const glasProcent = parseFloat(document.getElementById(`glas-${produktValg}`).value);
+      const totalVægt = (ppGram + peGram + metalGram + glasGram) / 1000 * antal; // Convert grams to kilograms
+      const prisPP = (ppGram * bearbejdningsPriser.pp).toFixed(2);
+      const prisPE = (peGram * bearbejdningsPriser.pe).toFixed(2);
+      const prisMetal = (metalGram * bearbejdningsPriser.metal).toFixed(2);
+      const prisGlas = (glasGram * bearbejdningsPriser.glas).toFixed(2);
+      const totalPris = (parseFloat(prisPP) + parseFloat(prisPE) + parseFloat(prisMetal) + parseFloat(prisGlas)).toFixed(2);
 
-    const totalVægt = produkt.vægt * antal;
-    vægtInput.value = totalVægt.toFixed(3);
+      produktDiv.querySelector(".pris-pp").value = prisPP;
+      produktDiv.querySelector(".pris-pe").value = prisPE;
+      produktDiv.querySelector(".pris-metal").value = prisMetal;
+      produktDiv.querySelector(".pris-glas").value = prisGlas;
+      produktDiv.querySelector(".total-vægt").value = totalVægt.toFixed(2); // Display in kilograms
 
-    const prisPP = (ppProcent * bearbejdningsPriser.pp * totalVægt).toFixed(2);
-    const prisPE = (peProcent * bearbejdningsPriser.pe * totalVægt).toFixed(2);
-    const prisMetal = (metalProcent * bearbejdningsPriser.metal * totalVægt).toFixed(2);
-    const prisGlas = (glasProcent * bearbejdningsPriser.glas * totalVægt).toFixed(2);
-    const totalPris = (parseFloat(prisPP) + parseFloat(prisPE) + parseFloat(prisMetal) + parseFloat(prisGlas)).toFixed(2);
+      samletPris += parseFloat(totalPris);
+      samletAntal += antal;
+    });
 
-    prisPPInput.value = prisPP;
-    prisPEInput.value = prisPE;
-    prisMetalInput.value = prisMetal;
-    prisGlasInput.value = prisGlas;
-    prisInput.value = totalPris;
+    document.getElementById("samlet-pris").value = samletPris.toFixed(2);
+    document.getElementById("samlet-antal").value = samletAntal;
   }
 </script>
 </body>
