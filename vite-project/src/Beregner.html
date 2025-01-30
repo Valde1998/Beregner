@@ -7,8 +7,9 @@
 </head>
 <body>
 <form id="produkt-form">
-  <div id="produkt-container">
+  <div id="produkt-container" class="produkt-container">
     <div class="produkt">
+      <button type="button" class="delete-button" onclick="sletProdukt(this)">X</button>
       <label for="produkt-valg-1">Vælg produkt:</label>
       <select id="produkt-valg-1" class="produkt-valg" onchange="opdaterVærdier()">
         <option value="">Vælg et produkt</option>
@@ -39,11 +40,12 @@
         <option value="tube">Tube</option>
       </select>
       <br>
-      <label for="antal-1">Antal:</label>
-      <input type="number" id="antal-1" class="antal" min="1" value="1" onchange="opdaterVærdier()" required>
+      <label for="antal-1" class="antal-label" style="display: none;">Antal:</label>
+      <input type="number" id="antal-1" class="antal" min="0" value="1" onchange="opdaterVærdier()" required style="display: none;">
       <br>
-      <label for="vægt-1">Vægt (g):</label>
-      <input type="number" id="vægt-1" class="vægt" min="0" step="0.001" value="15" onchange="opdaterVærdier()" required readonly>      <br>
+      <label for="vægt-1" class="vægt-label" style="display: none;">Vægt (g):</label>
+      <input type="number" id="vægt-1" class="vægt" min="0" step="0.001" value="0" onchange="opdaterVærdier()" required readonly style="display: none;">
+      <br>
       <img class="produkt-gif" src="" alt="Produkt GIF" style="width: 100px; height: auto; display: none;">
       <div id="materiale-info-1" class="materiale-info" style="display: none;">
         <label>PP (g): <input type="number" class="pp-gram" value="10.95" onchange="opdaterVærdier()"></label><br>
@@ -86,6 +88,7 @@
     const produktDiv = document.createElement("div");
     produktDiv.classList.add("produkt");
     produktDiv.innerHTML = `
+      <button type="button" class="delete-button" onclick="sletProdukt(this)">X</button>
       <label for="produkt-valg-${produktCount}">Vælg produkt:</label>
       <select id="produkt-valg-${produktCount}" class="produkt-valg" onchange="opdaterVærdier()">
         <option value="">Vælg et produkt</option>
@@ -116,11 +119,12 @@
         <option value="tube">Tube</option>
       </select>
       <br>
-      <label for="antal-${produktCount}">Antal:</label>
-      <input type="number" id="antal-${produktCount}" class="antal" min="1" value="1" onchange="opdaterVærdier()" required>
+      <label for="antal-${produktCount}" class="antal-label" style="display: none;">Antal:</label>
+      <input type="number" id="antal-${produktCount}" class="antal" min="0" value="1" onchange="opdaterVærdier()" required style="display: none;">
       <br>
-      <label for="vægt-${produktCount}">Vægt (g):</label>
-<input type="number" id="vægt-${produktCount}" class="vægt" min="0" step="0.001" value="15" onchange="opdaterVærdier()" required readonly>      <br>
+      <label for="vægt-${produktCount}" class="vægt-label" style="display: none;">Vægt (g):</label>
+      <input type="number" id="vægt-${produktCount}" class="vægt" min="0" step="0.001" value="0" onchange="opdaterVærdier()" required readonly style="display: none;">
+      <br>
       <img class="produkt-gif" src="" alt="Produkt GIF" style="width: 100px; height: auto; display: none;">
       <div id="materiale-info-${produktCount}" class="materiale-info" style="display: none;">
         <label>PP (g): <input type="number" class="pp-gram" value="10.95" onchange="opdaterVærdier()"></label><br>
@@ -138,6 +142,12 @@
     container.appendChild(produktDiv);
   }
 
+  function sletProdukt(button) {
+    const produktDiv = button.parentElement;
+    produktDiv.remove();
+    opdaterVærdier();
+  }
+
   function opdaterVærdier() {
     const produkter = document.querySelectorAll(".produkt");
     let samletPris = 0;
@@ -145,17 +155,28 @@
 
     produkter.forEach((produktDiv, index) => {
       const produktValg = produktDiv.querySelector(".produkt-valg").value;
-      const antal = parseInt(produktDiv.querySelector(".antal").value);
+      const antalLabel = produktDiv.querySelector(".antal-label");
+      const antalInput = produktDiv.querySelector(".antal");
+      const vægtLabel = produktDiv.querySelector(".vægt-label");
+      const vægtInput = produktDiv.querySelector(".vægt");
       const materialeInfo = produktDiv.querySelector(".materiale-info");
       const produktGif = produktDiv.querySelector(".produkt-gif");
 
       if (produktValg) {
+        antalLabel.style.display = "block";
+        antalInput.style.display = "block";
+        vægtLabel.style.display = "block";
+        vægtInput.style.display = "block";
         materialeInfo.style.display = "block";
         produktGif.src = `produkter/${produktValg}.gif`;
         produktGif.style.display = "block";
         produktGif.style.width = "300px"; // Ændre bredden til 300px
         produktGif.style.height = "auto"; // Bevar billedets proportioner
       } else {
+        antalLabel.style.display = "none";
+        antalInput.style.display = "none";
+        vægtLabel.style.display = "none";
+        vægtInput.style.display = "none";
         materialeInfo.style.display = "none";
         produktGif.style.display = "none";
       }
@@ -175,10 +196,10 @@
       }
 
       // Beregn prisen for hvert materiale
-      const prisPP = (ppGram * bearbejdningsPriser.pp * antal).toFixed(2);
-      const prisPE = (peGram * bearbejdningsPriser.pe * antal).toFixed(2);
-      const prisMetal = (metalGram * bearbejdningsPriser.metal * antal).toFixed(2);
-      const prisGlas = (glasGram * bearbejdningsPriser.glas * antal).toFixed(2);
+      const prisPP = (ppGram * bearbejdningsPriser.pp * antalInput.value).toFixed(2);
+      const prisPE = (peGram * bearbejdningsPriser.pe * antalInput.value).toFixed(2);
+      const prisMetal = (metalGram * bearbejdningsPriser.metal * antalInput.value).toFixed(2);
+      const prisGlas = (glasGram * bearbejdningsPriser.glas * antalInput.value).toFixed(2);
       const totalPris = (parseFloat(prisPP) + parseFloat(prisPE) + parseFloat(prisMetal) + parseFloat(prisGlas)).toFixed(2);
 
       // Opdater felterne med de beregnede værdier
@@ -190,10 +211,10 @@
 
       // Opdater total vægt baseret på materialernes vægt
       const totalVægt = ppGram + peGram + metalGram + glasGram;
-      produktDiv.querySelector(".vægt").value = totalVægt.toFixed(3);
+      vægtInput.value = totalVægt.toFixed(3);
 
       samletPris += parseFloat(totalPris);
-      samletAntal += antal;
+      samletAntal += parseInt(antalInput.value);
     });
 
     document.getElementById("samlet-pris").value = samletPris.toFixed(2);
