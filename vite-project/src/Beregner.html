@@ -50,19 +50,19 @@
       </select>
       <br>
       <label for="antal-1" class="antal-label" style="display: none;">Antal:</label>
-      <input type="number" id="antal-1" class="antal" min="0" value="1" onchange="opdaterVærdier()" required style="display: none;">
+      <input type="number" id="antal-1" class="antal" min="0" value="1" onblur="opdaterVærdier()" required style="display: none;">
       <br>
       <label for="vægt-1" class="vægt-label" style="display: none;">Vægt (g):</label>
-      <input type="number" id="vægt-1" class="vægt" min="0" step="0.001" value="0" onchange="opdaterVærdier()" required readonly style="display: none;">
+      <input type="number" id="vægt-1" class="vægt" min="0" step="0.001" value="0" onblur="opdaterVærdier()" required readonly style="display: none;">
       <br>
       <img class="produkt-gif" src="" alt="Produkt GIF" style="width: 100px; height: auto; display: none;">
       <button type="button" class="edit-button" onclick="toggleEdit(this)" style="display: none;">Rediger</button>
       <button type="button" class="save-button" onclick="toggleSave(this)" style="display: none;">Gem</button>
       <div id="materiale-info-1" class="materiale-info">
-        <label>PP (g): <input type="number" class="pp-gram" onchange="opdaterVærdier()"></label><br>
-        <label>PE (g): <input type="number" class="pe-gram" onchange="opdaterVærdier()"></label><br>
-        <label>Metal (g): <input type="number" class="metal-gram" onchange="opdaterVærdier()"></label><br>
-        <label>Glas (g): <input type="number" class="glas-gram" onchange="opdaterVærdier()"></label>
+        <label>PP (g): <input type="number" class="pp-gram" onblur="opdaterVærdier()"></label><br>
+        <label>PE (g): <input type="number" class="pe-gram" onblur="opdaterVærdier()"></label><br>
+        <label>Metal (g): <input type="number" class="metal-gram" onblur="opdaterVærdier()"></label><br>
+        <label>Glas (g): <input type="number" class="glas-gram" onblur="opdaterVærdier()"></label>
         <br>
         <label>Pris for PP (kr): <input type="number" class="pris-pp" readonly></label><br>
         <label>Pris for PE (kr): <input type="number" class="pris-pe" readonly></label><br>
@@ -132,19 +132,19 @@
       </select>
       <br>
       <label for="antal-${produktCount}" class="antal-label" style="display: none;">Antal:</label>
-      <input type="number" id="antal-${produktCount}" class="antal" min="0" value="1" onchange="opdaterVærdier()" required style="display: none;">
+      <input type="number" id="antal-${produktCount}" class="antal" min="0" value="1" onblur="opdaterVærdier()" required style="display: none;">
       <br>
       <label for="vægt-${produktCount}" class="vægt-label" style="display: none;">Vægt (g):</label>
-      <input type="number" id="vægt-${produktCount}" class="vægt" min="0" step="0.001" value="0" onchange="opdaterVærdier()" required readonly style="display: none;">
+      <input type="number" id="vægt-${produktCount}" class="vægt" min="0" step="0.001" value="0" onblur="opdaterVærdier()" required readonly style="display: none;">
       <br>
       <img class="produkt-gif" src="" alt="Produkt GIF" style="width: 100px; height: auto; display: none;">
       <button type="button" class="edit-button" onclick="toggleEdit(this)" style="display: none;">Rediger</button>
       <button type="button" class="save-button" onclick="toggleSave(this)" style="display: none;">Gem</button>
       <div id="materiale-info-${produktCount}" class="materiale-info">
-        <label>PP (g): <input type="number" class="pp-gram" onchange="opdaterVærdier()"></label><br>
-        <label>PE (g): <input type="number" class="pe-gram" onchange="opdaterVærdier()"></label><br>
-        <label>Metal (g): <input type="number" class="metal-gram" onchange="opdaterVærdier()"></label><br>
-        <label>Glas (g): <input type="number" class="glas-gram" onchange="opdaterVærdier()"></label>
+        <label>PP (g): <input type="number" class="pp-gram" onblur="opdaterVærdier()"></label><br>
+        <label>PE (g): <input type="number" class="pe-gram" onblur="opdaterVærdier()"></label><br>
+        <label>Metal (g): <input type="number" class="metal-gram" onblur="opdaterVærdier()"></label><br>
+        <label>Glas (g): <input type="number" class="glas-gram" onblur="opdaterVærdier()"></label>
         <br>
         <label>Pris for PP (kr): <input type="number" class="pris-pp" readonly></label><br>
         <label>Pris for PE (kr): <input type="number" class="pris-pe" readonly></label><br>
@@ -282,7 +282,7 @@
   }
 
   document.querySelectorAll(".pp-gram, .pe-gram, .metal-gram, .glas-gram").forEach(input => {
-    input.addEventListener("input", opdaterVærdier);
+    input.addEventListener("blur", opdaterVærdier);
   });
 </script>
 </body>
