@@ -4,6 +4,14 @@
   <meta charset="UTF-8">
   <title>Beregner</title>
   <link rel="stylesheet" href="style2.css">
+  <style>
+    .materiale-info {
+      display: none;
+    }
+    .edit-button, .save-button {
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
 <form id="produkt-form">
@@ -47,10 +55,12 @@
       <input type="number" id="vægt-1" class="vægt" min="0" step="0.001" value="0" onchange="opdaterVærdier()" required readonly style="display: none;">
       <br>
       <img class="produkt-gif" src="" alt="Produkt GIF" style="width: 100px; height: auto; display: none;">
-      <div id="materiale-info-1" class="materiale-info" style="display: none;">
-        <label>PP (g): <input type="number" class="pp-gram"  onchange="opdaterVærdier()"></label><br>
-        <label>PE (g): <input type="number" class="pe-gram"  onchange="opdaterVærdier()"></label><br>
-        <label>Metal (g): <input type="number" class="metal-gram"  onchange="opdaterVærdier()"></label><br>
+      <button type="button" class="edit-button" onclick="toggleEdit(this)" style="display: none;">Rediger</button>
+      <button type="button" class="save-button" onclick="toggleSave(this)" style="display: none;">Gem</button>
+      <div id="materiale-info-1" class="materiale-info">
+        <label>PP (g): <input type="number" class="pp-gram" onchange="opdaterVærdier()"></label><br>
+        <label>PE (g): <input type="number" class="pe-gram" onchange="opdaterVærdier()"></label><br>
+        <label>Metal (g): <input type="number" class="metal-gram" onchange="opdaterVærdier()"></label><br>
         <label>Glas (g): <input type="number" class="glas-gram" onchange="opdaterVærdier()"></label>
         <br>
         <label>Pris for PP (kr): <input type="number" class="pris-pp" readonly></label><br>
@@ -126,11 +136,13 @@
       <input type="number" id="vægt-${produktCount}" class="vægt" min="0" step="0.001" value="0" onchange="opdaterVærdier()" required readonly style="display: none;">
       <br>
       <img class="produkt-gif" src="" alt="Produkt GIF" style="width: 100px; height: auto; display: none;">
-      <div id="materiale-info-${produktCount}" class="materiale-info" style="display: none;">
-        <label>PP (g): <input type="number" class="pp-gram"  onchange="opdaterVærdier()"></label><br>
-        <label>PE (g): <input type="number" class="pe-gram"  onchange="opdaterVærdier()"></label><br>
-        <label>Metal (g): <input type="number" class="metal-gram"  onchange="opdaterVærdier()"></label><br>
-        <label>Glas (g): <input type="number" class="glas-gram"  onchange="opdaterVærdier()"></label>
+      <button type="button" class="edit-button" onclick="toggleEdit(this)" style="display: none;">Rediger</button>
+      <button type="button" class="save-button" onclick="toggleSave(this)" style="display: none;">Gem</button>
+      <div id="materiale-info-${produktCount}" class="materiale-info">
+        <label>PP (g): <input type="number" class="pp-gram" onchange="opdaterVærdier()"></label><br>
+        <label>PE (g): <input type="number" class="pe-gram" onchange="opdaterVærdier()"></label><br>
+        <label>Metal (g): <input type="number" class="metal-gram" onchange="opdaterVærdier()"></label><br>
+        <label>Glas (g): <input type="number" class="glas-gram" onchange="opdaterVærdier()"></label>
         <br>
         <label>Pris for PP (kr): <input type="number" class="pris-pp" readonly></label><br>
         <label>Pris for PE (kr): <input type="number" class="pris-pe" readonly></label><br>
@@ -148,6 +160,28 @@
     opdaterVærdier();
   }
 
+  function toggleEdit(button) {
+    const produktDiv = button.parentElement;
+    const materialeInfo = produktDiv.querySelector(".materiale-info");
+    const editButton = produktDiv.querySelector(".edit-button");
+    const saveButton = produktDiv.querySelector(".save-button");
+
+    materialeInfo.style.display = "block";
+    editButton.style.display = "none";
+    saveButton.style.display = "block";
+  }
+
+  function toggleSave(button) {
+    const produktDiv = button.parentElement;
+    const materialeInfo = produktDiv.querySelector(".materiale-info");
+    const editButton = produktDiv.querySelector(".edit-button");
+    const saveButton = produktDiv.querySelector(".save-button");
+
+    materialeInfo.style.display = "none";
+    editButton.style.display = "block";
+    saveButton.style.display = "none";
+  }
+
   function opdaterVærdier() {
     const produkter = document.querySelectorAll(".produkt");
     let samletPris = 0;
@@ -159,19 +193,19 @@
       const antalInput = produktDiv.querySelector(".antal");
       const vægtLabel = produktDiv.querySelector(".vægt-label");
       const vægtInput = produktDiv.querySelector(".vægt");
-      const materialeInfo = produktDiv.querySelector(".materiale-info");
       const produktGif = produktDiv.querySelector(".produkt-gif");
+      const editButton = produktDiv.querySelector(".edit-button");
 
       if (produktValg) {
         antalLabel.style.display = "block";
         antalInput.style.display = "block";
         vægtLabel.style.display = "block";
         vægtInput.style.display = "block";
-        materialeInfo.style.display = "block";
         produktGif.src = `produkter/${produktValg}.gif`;
         produktGif.style.display = "block";
-        produktGif.style.width = "300px"; // Ændre bredden til 300px
-        produktGif.style.height = "auto"; // Bevar billedets proportioner
+        produktGif.style.width = "300px";
+        produktGif.style.height = "auto";
+        editButton.style.display = "block";
 
         let ppGram = 0, peGram = 0, metalGram = 0, glasGram = 0;
 
@@ -191,7 +225,6 @@
                 // Tilføj flere cases for andre produkter her
         }
 
-        // Sæt værdierne for inputfelterne kun hvis de er tomme
         if (!produktDiv.querySelector(".pp-gram").value) produktDiv.querySelector(".pp-gram").value = ppGram;
         if (!produktDiv.querySelector(".pe-gram").value) produktDiv.querySelector(".pe-gram").value = peGram;
         if (!produktDiv.querySelector(".metal-gram").value) produktDiv.querySelector(".metal-gram").value = metalGram;
@@ -201,8 +234,8 @@
         antalInput.style.display = "none";
         vægtLabel.style.display = "none";
         vægtInput.style.display = "none";
-        materialeInfo.style.display = "none";
         produktGif.style.display = "none";
+        editButton.style.display = "none";
       }
 
       let ppGram = parseFloat(produktDiv.querySelector(".pp-gram").value) || 0;
@@ -210,21 +243,18 @@
       let metalGram = parseFloat(produktDiv.querySelector(".metal-gram").value) || 0;
       let glasGram = parseFloat(produktDiv.querySelector(".glas-gram").value) || 0;
 
-      // Beregn prisen for hvert materiale
       const prisPP = (ppGram * bearbejdningsPriser.pp * antalInput.value).toFixed(2);
       const prisPE = (peGram * bearbejdningsPriser.pe * antalInput.value).toFixed(2);
       const prisMetal = (metalGram * bearbejdningsPriser.metal * antalInput.value).toFixed(2);
       const prisGlas = (glasGram * bearbejdningsPriser.glas * antalInput.value).toFixed(2);
       const totalPris = (parseFloat(prisPP) + parseFloat(prisPE) + parseFloat(prisMetal) + parseFloat(prisGlas)).toFixed(2);
 
-      // Opdater felterne med de beregnede værdier
       produktDiv.querySelector(".pris-pp").value = prisPP;
       produktDiv.querySelector(".pris-pe").value = prisPE;
       produktDiv.querySelector(".pris-metal").value = prisMetal;
       produktDiv.querySelector(".pris-glas").value = prisGlas;
       produktDiv.querySelector(".total-pris").value = totalPris;
 
-      // Opdater total vægt baseret på materialernes vægt
       const totalVægt = ppGram + peGram + metalGram + glasGram;
       vægtInput.value = totalVægt.toFixed(3);
 
@@ -236,7 +266,6 @@
     document.getElementById("samlet-antal").value = samletAntal;
   }
 
-  // Tilføj event listeners til inputfelterne for at opdatere vægten
   document.querySelectorAll(".pp-gram, .pe-gram, .metal-gram, .glas-gram").forEach(input => {
     input.addEventListener("input", opdaterVærdier);
   });
