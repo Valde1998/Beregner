@@ -18,6 +18,7 @@
   <div id="produkt-container" class="produkt-container">
     <div class="produkt">
       <button type="button" class="delete-button" onclick="sletProdukt(this)">X</button>
+      <button type="button" class="reset-button" onclick="nulstilProdukt(this)">Nulstil</button>
       <label for="produkt-valg-1">Vælg produkt:</label>
       <select id="produkt-valg-1" class="produkt-valg" onchange="opdaterVærdier()">
         <option value="">Vælg et produkt</option>
@@ -99,6 +100,7 @@
     produktDiv.classList.add("produkt");
     produktDiv.innerHTML = `
       <button type="button" class="delete-button" onclick="sletProdukt(this)">X</button>
+      <button type="button" class="reset-button" onclick="nulstilProdukt(this)">Nulstil</button>
       <label for="produkt-valg-${produktCount}">Vælg produkt:</label>
       <select id="produkt-valg-${produktCount}" class="produkt-valg" onchange="opdaterVærdier()">
         <option value="">Vælg et produkt</option>
@@ -157,6 +159,19 @@
   function sletProdukt(button) {
     const produktDiv = button.parentElement;
     produktDiv.remove();
+    opdaterVærdier();
+  }
+
+  function nulstilProdukt(button) {
+    const produktDiv = button.parentElement;
+    produktDiv.querySelector(".produkt-valg").value = "";
+    produktDiv.querySelector(".antal").value = 1;
+    produktDiv.querySelector(".vægt").value = 0;
+    produktDiv.querySelector(".produkt-gif").style.display = "none";
+    produktDiv.querySelector(".edit-button").style.display = "none";
+    produktDiv.querySelector(".save-button").style.display = "none";
+    produktDiv.querySelector(".materiale-info").style.display = "none";
+    produktDiv.querySelectorAll("input[type='number']").forEach(input => input.value = "");
     opdaterVærdier();
   }
 
