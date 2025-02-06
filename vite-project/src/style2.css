@@ -67,3 +67,19 @@ div[id^="materiale-info"] {
     height: 25px;
     cursor: pointer;
 }
+.materiale-info {
+    display: none;
+}
+.edit-button, .save-button {
+    margin-top: 10px;
+}
+.reset-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+.reset-button img {
+    width: 24px; /* Juster størrelsen efter behov */
+    height: 24px;
+}
