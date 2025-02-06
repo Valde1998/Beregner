@@ -11,6 +11,16 @@
     .edit-button, .save-button {
       margin-top: 10px;
     }
+    .reset-button {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+    .reset-button img {
+      width: 24px; /* Juster størrelsen efter behov */
+      height: 24px;
+    }
   </style>
 </head>
 <body>
@@ -18,7 +28,9 @@
   <div id="produkt-container" class="produkt-container">
     <div class="produkt">
       <button type="button" class="delete-button" onclick="sletProdukt(this)">X</button>
-      <button type="button" class="reset-button" onclick="nulstilProdukt(this)">Nulstil</button>
+      <button type="button" class="reset-button" onclick="nulstilProdukt(this)">
+        <img src="View-refresh.svg.png" alt="Nulstil">
+      </button>
       <label for="produkt-valg-1">Vælg produkt:</label>
       <select id="produkt-valg-1" class="produkt-valg" onchange="opdaterVærdier()">
         <option value="">Vælg et produkt</option>
@@ -100,7 +112,9 @@
     produktDiv.classList.add("produkt");
     produktDiv.innerHTML = `
       <button type="button" class="delete-button" onclick="sletProdukt(this)">X</button>
-      <button type="button" class="reset-button" onclick="nulstilProdukt(this)">Nulstil</button>
+      <button type="button" class="reset-button" onclick="nulstilProdukt(this)">
+        <img src="View-refresh.svg.png" alt="Nulstil">
+      </button>
       <label for="produkt-valg-${produktCount}">Vælg produkt:</label>
       <select id="produkt-valg-${produktCount}" class="produkt-valg" onchange="opdaterVærdier()">
         <option value="">Vælg et produkt</option>
@@ -263,7 +277,6 @@
       const prisMetal = (metalGram * bearbejdningsPriser.metal * antalInput.value).toFixed(2);
       const prisGlas = (glasGram * bearbejdningsPriser.glas * antalInput.value).toFixed(2);
       const totalPris = (parseFloat(prisPP) + parseFloat(prisPE) + parseFloat(prisMetal) + parseFloat(prisGlas)).toFixed(2);
-
       produktDiv.querySelector(".pris-pp").value = prisPP;
       produktDiv.querySelector(".pris-pe").value = prisPE;
       produktDiv.querySelector(".pris-metal").value = prisMetal;
