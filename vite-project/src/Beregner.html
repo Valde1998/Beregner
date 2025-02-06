@@ -14,7 +14,7 @@
         <img src="View-refresh.svg.png" alt="Nulstil">
       </button>
       <label for="produkt-valg-1">Vælg produkt:</label>
-      <select id="produkt-valg-1" class="produkt-valg" onchange="opdaterVærdier()">
+      <select id="produkt-valg-1" class="produkt-valg" onchange="nulstilOgOpdater(this)">
         <option value="">Vælg et produkt</option>
         <option value="pumpe">Pumpe</option>
         <option value="airless-dispenser">Airless dispenser</option>
@@ -98,7 +98,7 @@
         <img src="View-refresh.svg.png" alt="Nulstil">
       </button>
       <label for="produkt-valg-${produktCount}">Vælg produkt:</label>
-      <select id="produkt-valg-${produktCount}" class="produkt-valg" onchange="opdaterVærdier()">
+      <select id="produkt-valg-${produktCount}" class="produkt-valg" onchange="nulstilOgOpdater(this)">
         <option value="">Vælg et produkt</option>
         <option value="pumpe">Pumpe</option>
         <option value="airless-dispenser">Airless dispenser</option>
@@ -161,6 +161,18 @@
   function nulstilProdukt(button) {
     const produktDiv = button.parentElement;
     produktDiv.querySelector(".produkt-valg").value = "";
+    produktDiv.querySelector(".antal").value = 1;
+    produktDiv.querySelector(".vægt").value = 0;
+    produktDiv.querySelector(".produkt-gif").style.display = "none";
+    produktDiv.querySelector(".edit-button").style.display = "none";
+    produktDiv.querySelector(".save-button").style.display = "none";
+    produktDiv.querySelector(".materiale-info").style.display = "none";
+    produktDiv.querySelectorAll("input[type='number']").forEach(input => input.value = "");
+    opdaterVærdier();
+  }
+
+  function nulstilOgOpdater(selectElement) {
+    const produktDiv = selectElement.closest(".produkt");
     produktDiv.querySelector(".antal").value = 1;
     produktDiv.querySelector(".vægt").value = 0;
     produktDiv.querySelector(".produkt-gif").style.display = "none";
