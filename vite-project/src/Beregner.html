@@ -304,32 +304,50 @@
     emailjs.init("L5L7URhoRvZIXQtJ4"); // Erstat med din EmailJS Public Key
   });
 
+  // Initialiser EmailJS med din public key
+  emailjs.init("L5L7URhoRvZIXQtJ4");
+
   function sendEmail() {
     const userEmail = document.getElementById("user-email").value;
-
     if (!userEmail) {
-      alert("Indtast en gyldig e-mailadresse.");
+      alert("Indtast din e-mailadresse.");
       return;
     }
+
+    let produkter = [];
+    document.querySelectorAll(".produkt").forEach(produktDiv => {
+      const produktNavn = produktDiv.querySelector(".produkt-valg").value;
+      const antal = produktDiv.querySelector(".antal").value;
+      const vægt = produktDiv.querySelector(".vægt").value;
+      const pris = produktDiv.querySelector(".total-pris").value;
+
+      if (produktNavn) {
+        produkter.push(`${antal}x ${produktNavn} - Vægt: ${vægt}g - Pris: ${pris}kr`);
+      }
+    });
 
     const samletPris = document.getElementById("samlet-pris").value;
     const samletAntal = document.getElementById("samlet-antal").value;
 
-    const templateParams = {
-      to_email: userEmail,
-      message: `Samlet pris: ${samletPris} kr.\nAntal produkter: ${samletAntal}`
+    // Konstruer e-mail data
+    const emailData = {
+      user_email: userEmail,
+      product_list: produkter.join("\n"),
+      total_price: samletPris,
+      total_items: samletAntal
     };
 
-    emailjs.send("service_azs0k37", "template_czf7zst", templateParams)
-            .then(function(response) {
+    // Send e-mail via EmailJS
+    emailjs.send("service_azs0k37", "template_czf7zst", emailData)
+            .then(response => {
               alert("E-mail sendt succesfuldt!");
-            }, function(error) {
+              console.log("EmailJS Response:", response);
+            })
+            .catch(error => {
               alert("Fejl ved afsendelse af e-mail.");
-              console.error("EmailJS fejl:", error);
+              console.error("EmailJS Error:", error);
             });
   }
-
-
 </script>
 </body>
 </html>
