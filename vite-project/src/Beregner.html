@@ -181,23 +181,15 @@
 
   function nulstilOgOpdater(selectElement) {
     const produktDiv = selectElement.closest(".produkt");
-    const antalInput = produktDiv.querySelector(".antal");
-    const antalLabel = produktDiv.querySelector(".antal-label");
-
+    produktDiv.querySelector(".antal").value = 1;
     produktDiv.querySelector(".vægt").value = 0;
     produktDiv.querySelector(".produkt-gif").style.display = "none";
     produktDiv.querySelector(".edit-button").style.display = "none";
     produktDiv.querySelector(".save-button").style.display = "none";
     produktDiv.querySelector(".materiale-info").style.display = "none";
-
-    // Sætter antal til 1 og viser feltet
-    antalInput.value = 1;
-    antalInput.style.display = "inline-block";
-    antalLabel.style.display = "inline-block";
-
+    produktDiv.querySelectorAll("input[type='number']").forEach(input => input.value = "");
     opdaterVærdier();
   }
-
 
   function toggleEdit(button) {
     const produktDiv = button.parentElement;
@@ -346,7 +338,7 @@
     };
 
     // Send e-mail via EmailJS
-     emailjs.send("service_azs0k37", "template_czf7zst", emailData)
+    emailjs.send("service_azs0k37", "template_czf7zst", emailData)
             .then(response => {
               alert("E-mail sendt succesfuldt!");
               console.log("EmailJS Response:", response);
@@ -364,7 +356,7 @@
       }
     });
   });
-
+  
 </script>
 </body>
 </html>
