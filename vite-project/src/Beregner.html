@@ -348,6 +348,15 @@
               console.error("EmailJS Error:", error);
             });
   }
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("produkt-form").addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault(); // Forhindrer standardformularindsendelse
+        opdaterVærdier(); // Kald funktionen for at opdatere værdier
+      }
+    });
+  });
+  
 </script>
 </body>
 </html>
