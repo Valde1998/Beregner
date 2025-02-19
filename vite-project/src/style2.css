@@ -222,3 +222,24 @@ button {
 button:hover {
     background: linear-gradient(135deg, #0056b3, var(--primary-color));
 }
+/* Tilføj dette til din CSS-fil */
+#add-product-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+#add-product-button {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#add-product-button:hover {
+    background-color: #0056b3;
+}
