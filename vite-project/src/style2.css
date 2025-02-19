@@ -239,10 +239,9 @@ button:hover {
 #add-product-button:hover {
     background-color: #0056b3;
 }
-/* Tilføj dette til din CSS-fil */
-body {
-    background-image: url('C:\Inteli\Beregner\vite-project\src\Packwise.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+#packwise-image {
+    display: block;
+    margin: 10px auto;
+    width: 500px; /* Fast bredde */
+    height: auto; /* Bevarer billedets proportioner */
 }
