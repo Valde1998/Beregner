@@ -188,14 +188,14 @@ body {
 
 /* Tilføjelse af farvevariabler */
 :root {
-    --primary-color: #007bff;
-    --secondary-color: #6c757d;
-    --success-color: #28a745;
-    --danger-color: #dc3545;
-    --warning-color: #ffc107;
-    --info-color: #17a2b8;
-    --light-color: #f8f9fa;
-    --dark-color: #343a40;
+    --primary-color: #4caf50; /* Grøn */
+    --secondary-color: #8bc34a; /* Lys grøn */
+    --success-color: #4caf50; /* Grøn */
+    --danger-color: #f44336; /* Rød */
+    --warning-color: #ff9800; /* Orange */
+    --info-color: #00bcd4; /* Turkis */
+    --light-color: #f1f8e9; /* Meget lys grøn */
+    --dark-color: #2e7d32; /* Mørk grøn */
 }
 
 button {
