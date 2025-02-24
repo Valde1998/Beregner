@@ -184,6 +184,12 @@ input[type="number"]:hover, select:hover {
 
 body {
     font-family: 'Roboto', sans-serif;
+    background: url('/src/peter-steiner-1973-hmFb-uu0xog-unsplash.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #343a40;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
 }
 
 /* Tilføjelse af farvevariabler */
