@@ -4,7 +4,7 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: url('../src/baggrund.jpg') no-repeat center center fixed;
+    background: url('../src/img.png') no-repeat center center fixed;
     background-size: cover;
     color: #343a40;
     margin: 0;
@@ -18,7 +18,7 @@ h1, h2 {
 }
 
 form {
-    background-color: #fdfcfc;
+    background-color: #fcfbfb;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -108,7 +108,8 @@ button.reset-button:hover img {
     flex: 1 1 300px;
     min-width: 300px;
     max-width: 300px;
-    background-color: #ffffff;
+    background: url('../src/baggrund.jpg') no-repeat center center fixed;
+    background-size: cover;
     padding: 20px;
     border: 1px solid #ced4da;
     border-radius: 8px;
