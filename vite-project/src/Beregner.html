@@ -299,11 +299,11 @@
       vægtInput.value = totalVægt.toFixed(3);
 
       samletPris += parseFloat(totalPris);
-      samletAntal += parseInt(antalInput.value);
+      samletAntal += parseInt(antalInput.value) || 0; // Sikrer at samletAntal altid har en værdi
     });
 
     document.getElementById("samlet-pris").value = samletPris.toFixed(2);
-    document.getElementById("samlet-antal").value = samletAntal;
+    document.getElementById("samlet-antal").value = samletAntal || 0; // Sikrer at feltet aldrig er tomt
   }
 
   document.querySelectorAll(".pp-gram, .pe-gram, .metal-gram, .glas-gram").forEach(input => {
