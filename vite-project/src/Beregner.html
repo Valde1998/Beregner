@@ -54,15 +54,17 @@
       <button type="button" class="edit-button" onclick="toggleEdit(this)" style="display: none;">Rediger</button>
       <button type="button" class="save-button" onclick="toggleSave(this)" style="display: none;">Gem</button>
       <div id="materiale-info-1" class="materiale-info">
-        <label>PP (g): <input type="number" class="pp-gram" onblur="opdaterVærdier()"></label><br>
-        <label>PE (g): <input type="number" class="pe-gram" onblur="opdaterVærdier()"></label><br>
-        <label>Metal (g): <input type="number" class="metal-gram" onblur="opdaterVærdier()"></label><br>
+        <label>PP (g): <input type="number" class="pp-gram" onblur="opdaterVærdier()"></label>
+        <label>PE (g): <input type="number" class="pe-gram" onblur="opdaterVærdier()"></label>
+        <label>Metal (g): <input type="number" class="metal-gram" onblur="opdaterVærdier()"></label>
         <label>Glas (g): <input type="number" class="glas-gram" onblur="opdaterVærdier()"></label>
+        <label>Træ (g): <input type="number" class="træ-gram" onblur="opdaterVærdier()"></label><
         <br>
-        <label>Pris for PP (kr): <input type="number" class="pris-pp" readonly></label><br>
-        <label>Pris for PE (kr): <input type="number" class="pris-pe" readonly></label><br>
-        <label>Pris for Metal (kr): <input type="number" class="pris-metal" readonly></label><br>
-        <label>Pris for Glas (kr): <input type="number" class="pris-glas" readonly></label><br>
+        <label>Pris for PP (kr): <input type="number" class="pris-pp" readonly></label>
+        <label>Pris for PE (kr): <input type="number" class="pris-pe" readonly></label>
+        <label>Pris for Metal (kr): <input type="number" class="pris-metal" readonly></label>
+        <label>Pris for Glas (kr): <input type="number" class="pris-glas" readonly></label>
+        <label>Pris for Træ (kr): <input type="number" class="pris-træ" readonly></label>
         <label>Total Pris (kr): <input type="number" class="total-pris" readonly></label>
       </div>
     </div>
@@ -96,7 +98,8 @@
     pp: 0.004, // Pris pr. gram for PP
     pe: 0.004, // Pris pr. gram for PE
     metal: 0.001, // Pris pr. gram for Metal
-    glas: 0.002 // Pris pr. gram for Glas
+    glas: 0.002, // Pris pr. gram for Glas
+    træ: 0.00066 // Pris pr. gram for Træ
   };
 
   function tilføjProdukt() {
@@ -154,11 +157,14 @@
         <label>PE (g): <input type="number" class="pe-gram" onblur="opdaterVærdier()"></label><br>
         <label>Metal (g): <input type="number" class="metal-gram" onblur="opdaterVærdier()"></label><br>
         <label>Glas (g): <input type="number" class="glas-gram" onblur="opdaterVærdier()"></label>
+        <label>Træ (g): <input type="number" class="træ-gram" onblur="opdaterVærdier()"></label>
         <br>
         <label>Pris for PP (kr): <input type="number" class="pris-pp" readonly></label><br>
         <label>Pris for PE (kr): <input type="number" class="pris-pe" readonly></label><br>
         <label>Pris for Metal (kr): <input type="number" class="pris-metal" readonly></label><br>
         <label>Pris for Glas (kr): <input type="number" class="pris-glas" readonly></label><br>
+        <label>Pris for Træ (kr): <input type="number" class="pris-træ" readonly></label><br>
+
         <label>Total Pris (kr): <input type="number" class="total-pris" readonly></label>
       </div>
     `;
@@ -253,7 +259,7 @@
         produktGif.style.height = "auto";
         editButton.style.display = "block";
 
-        let ppGram = 0, peGram = 0, metalGram = 0, glasGram = 0;
+        let ppGram = 0, peGram = 0, metalGram = 0, glasGram = 0, træGram = 0;
 
         switch (produktValg) {
           case "pumpe":
@@ -261,18 +267,35 @@
             peGram = 1.507;
             metalGram = 1.132;
             glasGram = 0.058;
+            træGram = 0; // Tilføj værdi for træ, hvis relevant
             break;
           case "airless-dispenser":
             ppGram = 10.95;
             peGram = 2.26;
             metalGram = 1.70;
             glasGram = 0.09;
+            træGram = 0; // Tilføj værdi for træ, hvis relevant
             break;
           case "trigger-sprayer":
             ppGram = 16.79;
             peGram = 0.3;
             metalGram = 2.26;
             glasGram = 0.05;
+            træGram = 0; // Tilføj værdi for træ, hvis relevant
+            break;
+          case "creme-pumpe":
+            ppGram = 10.27;
+            peGram = 0.32;
+            metalGram = 0.50;
+            glasGram = 0.06;
+            træGram = 0; // Tilføj værdi for træ, hvis relevant
+            break;
+          case "creme-krukke":
+            ppGram = 51.4;
+            peGram = 51.4;
+            metalGram = 0;
+            glasGram = 0;
+            træGram = 0; // Tilføj værdi for træ, hvis relevant
             break;
         }
 
@@ -280,43 +303,41 @@
         if (!produktDiv.querySelector(".pe-gram").value) produktDiv.querySelector(".pe-gram").value = peGram;
         if (!produktDiv.querySelector(".metal-gram").value) produktDiv.querySelector(".metal-gram").value = metalGram;
         if (!produktDiv.querySelector(".glas-gram").value) produktDiv.querySelector(".glas-gram").value = glasGram;
-      } else {
-        antalLabel.style.display = "none";
-        antalInput.style.display = "none";
-        vægtLabel.style.display = "none";
-        vægtInput.style.display = "none";
-        produktGif.style.display = "none";
-        editButton.style.display = "none";
+        if (!produktDiv.querySelector(".træ-gram").value) produktDiv.querySelector(".træ-gram").value = træGram; // Tilføjet her
       }
 
       let ppGram = parseFloat(produktDiv.querySelector(".pp-gram").value) || 0;
       let peGram = parseFloat(produktDiv.querySelector(".pe-gram").value) || 0;
       let metalGram = parseFloat(produktDiv.querySelector(".metal-gram").value) || 0;
       let glasGram = parseFloat(produktDiv.querySelector(".glas-gram").value) || 0;
+      let træGram = parseFloat(produktDiv.querySelector(".træ-gram").value) || 0; // Tilføjet her
 
       const prisPP = (ppGram * bearbejdningsPriser.pp * antalInput.value).toFixed(2);
       const prisPE = (peGram * bearbejdningsPriser.pe * antalInput.value).toFixed(2);
       const prisMetal = (metalGram * bearbejdningsPriser.metal * antalInput.value).toFixed(2);
       const prisGlas = (glasGram * bearbejdningsPriser.glas * antalInput.value).toFixed(2);
-      const totalPris = (parseFloat(prisPP) + parseFloat(prisPE) + parseFloat(prisMetal) + parseFloat(prisGlas)).toFixed(2);
+      const prisTræ = (træGram * bearbejdningsPriser.træ * antalInput.value).toFixed(2); // Tilføjet her
+      const totalPris = (parseFloat(prisPP) + parseFloat(prisPE) + parseFloat(prisMetal) + parseFloat(prisGlas) + parseFloat(prisTræ)).toFixed(2); // Tilføjet prisTræ
+
       produktDiv.querySelector(".pris-pp").value = prisPP;
       produktDiv.querySelector(".pris-pe").value = prisPE;
       produktDiv.querySelector(".pris-metal").value = prisMetal;
       produktDiv.querySelector(".pris-glas").value = prisGlas;
+      produktDiv.querySelector(".pris-træ").value = prisTræ; // Tilføjet her
       produktDiv.querySelector(".total-pris").value = totalPris;
 
-      const totalVægt = ppGram + peGram + metalGram + glasGram;
+      const totalVægt = ppGram + peGram + metalGram + glasGram + træGram; // Tilføjet træGram
       vægtInput.value = totalVægt.toFixed(3);
 
       samletPris += parseFloat(totalPris);
-      samletAntal += parseInt(antalInput.value) || 0; // Sikrer at samletAntal altid har en værdi
+      samletAntal += parseInt(antalInput.value) || 0;
     });
 
     document.getElementById("samlet-pris").value = samletPris.toFixed(2);
-    document.getElementById("samlet-antal").value = samletAntal || 0; // Sikrer at feltet aldrig er tomt
+    document.getElementById("samlet-antal").value = samletAntal || 0;
   }
 
-  document.querySelectorAll(".pp-gram, .pe-gram, .metal-gram, .glas-gram").forEach(input => {
+  document.querySelectorAll(".pp-gram, .pe-gram, .metal-gram, .glas-gram, .træ-gram").forEach(input => {
     input.addEventListener("blur", opdaterVærdier);
   });
 
