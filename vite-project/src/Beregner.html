@@ -51,7 +51,7 @@
       <input type="number" id="vægt-1" class="vægt" min="0" step="0.001" value="0" onblur="opdaterVærdier()" required readonly style="display: none;">
       <br>
       <img class="produkt-gif" src="" alt="Produkt GIF" style="width: 100px; height: auto; display: none;">
-      <button type="button" class="edit-save-button" onclick="toggleEditSave(this)">Rediger</button>
+      <button type="button" class="edit-save-button" onclick="toggleEditSave(this)" style="display: none;">Rediger</button>
       <div id="materiale-info-1" class="materiale-info">
         <label>PP (g): <input type="number" class="pp-gram" onblur="opdaterVærdier()"></label><br>
         <label>PE (g): <input type="number" class="pe-gram" onblur="opdaterVærdier()"></label><br>
@@ -144,7 +144,7 @@
       <input type="number" id="vægt-${produktCount}" class="vægt" min="0" step="0.001" value="0" onblur="opdaterVærdier()" required readonly style="display: none;">
       <br>
       <img class="produkt-gif" src="" alt="Produkt GIF" style="width: 100px; height: auto; display: none;">
-      <button type="button" class="edit-save-button" onclick="toggleEditSave(this)">Rediger</button>
+      <button type="button" class="edit-save-button" onclick="toggleEditSave(this)" style="display: none;">Rediger</button>
       <div id="materiale-info-${produktCount}" class="materiale-info">
         <label>PP (g): <input type="number" class="pp-gram" onblur="opdaterVærdier()"></label><br>
         <label>PE (g): <input type="number" class="pe-gram" onblur="opdaterVærdier()"></label><br>
@@ -253,6 +253,9 @@
 
           // Vis/skjul materiale-info baseret på redigeringsstatus
           materialeInfo.style.display = isEditing ? "block" : "none";
+
+          // Vis "Rediger" knappen
+          editSaveButton.style.display = "block";
 
           // Indlæs standardvægt for produktet (hvis ikke allerede indtastet)
           let ppGram = 0, peGram = 0, metalGram = 0, glasGram = 0, træGram = 0;
