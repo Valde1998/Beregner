@@ -9,7 +9,7 @@
 <body>
 <form id="produkt-form">
   <div id="produkt-container" class="produkt-container">
-    <div class="produkt">
+    <div class="produkt" data-editing="false">
       <button type="button" class="delete-button" onclick="sletProdukt(this)">X</button>
       <button type="button" class="reset-button" onclick="nulstilProdukt(this)">
         <img src="View-refresh.svg.png" alt="Nulstil">
@@ -51,29 +51,25 @@
       <input type="number" id="vægt-1" class="vægt" min="0" step="0.001" value="0" onblur="opdaterVærdier()" required readonly style="display: none;">
       <br>
       <img class="produkt-gif" src="" alt="Produkt GIF" style="width: 100px; height: auto; display: none;">
-      <button type="button" class="edit-button" onclick="toggleEdit(this)" style="display: none;">Rediger</button>
-      <button type="button" class="save-button" onclick="toggleSave(this)" style="display: none;">Gem</button>
+      <button type="button" class="edit-save-button" onclick="toggleEditSave(this)">Rediger</button>
       <div id="materiale-info-1" class="materiale-info">
-        <label>PP (g): <input type="number" class="pp-gram" onblur="opdaterVærdier()"></label>
-        <label>PE (g): <input type="number" class="pe-gram" onblur="opdaterVærdier()"></label>
-        <label>Metal (g): <input type="number" class="metal-gram" onblur="opdaterVærdier()"></label>
-        <label>Glas (g): <input type="number" class="glas-gram" onblur="opdaterVærdier()"></label>
-        <label>Træ (g): <input type="number" class="træ-gram" onblur="opdaterVærdier()"></label><
-        <br>
-        <label>Pris for PP (kr): <input type="number" class="pris-pp" readonly></label>
-        <label>Pris for PE (kr): <input type="number" class="pris-pe" readonly></label>
-        <label>Pris for Metal (kr): <input type="number" class="pris-metal" readonly></label>
-        <label>Pris for Glas (kr): <input type="number" class="pris-glas" readonly></label>
-        <label>Pris for Træ (kr): <input type="number" class="pris-træ" readonly></label>
+        <label>PP (g): <input type="number" class="pp-gram" onblur="opdaterVærdier()"></label><br>
+        <label>PE (g): <input type="number" class="pe-gram" onblur="opdaterVærdier()"></label><br>
+        <label>Metal (g): <input type="number" class="metal-gram" onblur="opdaterVærdier()"></label><br>
+        <label>Glas (g): <input type="number" class="glas-gram" onblur="opdaterVærdier()"></label><br>
+        <label>Træ (g): <input type="number" class="træ-gram" onblur="opdaterVærdier()"></label><br>
+        <label>Pris for PP (kr): <input type="number" class="pris-pp" readonly></label><br>
+        <label>Pris for PE (kr): <input type="number" class="pris-pe" readonly></label><br>
+        <label>Pris for Metal (kr): <input type="number" class="pris-metal" readonly></label><br>
+        <label>Pris for Glas (kr): <input type="number" class="pris-glas" readonly></label><br>
+        <label>Pris for Træ (kr): <input type="number" class="pris-træ" readonly></label><br>
         <label>Total Pris (kr): <input type="number" class="total-pris" readonly></label>
       </div>
     </div>
   </div>
-  <body>
   <div id="add-product-container">
     <button id="add-product-button" type="button" onclick="tilføjProdukt()">Tilføj Produkt</button>
   </div>
-  </body>
   <img id="packwise-image" src="../src/Packwise.png" alt="Packwise" />
   <br><br>
   <label for="samlet-pris">Samlet Pris (kr):</label>
@@ -82,13 +78,9 @@
   <label for="samlet-antal">Antal Produkter:</label>
   <input type="number" id="samlet-antal" min="0" readonly>
   <br><br>
-  <form id="produkt-form">
-    <label for="user-email">Din e-mail:</label>
-    <input type="email" id="user-email" required>
-
-    <button type="button" onclick="sendEmail()">Send resultat</button>
-  </form>
-
+  <label for="user-email">Din e-mail:</label>
+  <input type="email" id="user-email" required>
+  <button type="button" onclick="sendEmail()">Send resultat</button>
 </form>
 
 <script>
@@ -108,6 +100,8 @@
 
     const produktDiv = document.createElement("div");
     produktDiv.classList.add("produkt");
+    produktDiv.setAttribute("data-editing", "false"); // Tilføj data-editing attribut
+
     produktDiv.innerHTML = `
       <button type="button" class="delete-button" onclick="sletProdukt(this)">X</button>
       <button type="button" class="reset-button" onclick="nulstilProdukt(this)">
@@ -150,21 +144,18 @@
       <input type="number" id="vægt-${produktCount}" class="vægt" min="0" step="0.001" value="0" onblur="opdaterVærdier()" required readonly style="display: none;">
       <br>
       <img class="produkt-gif" src="" alt="Produkt GIF" style="width: 100px; height: auto; display: none;">
-      <button type="button" class="edit-button" onclick="toggleEdit(this)" style="display: none;">Rediger</button>
-      <button type="button" class="save-button" onclick="toggleSave(this)" style="display: none;">Gem</button>
+      <button type="button" class="edit-save-button" onclick="toggleEditSave(this)">Rediger</button>
       <div id="materiale-info-${produktCount}" class="materiale-info">
         <label>PP (g): <input type="number" class="pp-gram" onblur="opdaterVærdier()"></label><br>
         <label>PE (g): <input type="number" class="pe-gram" onblur="opdaterVærdier()"></label><br>
         <label>Metal (g): <input type="number" class="metal-gram" onblur="opdaterVærdier()"></label><br>
-        <label>Glas (g): <input type="number" class="glas-gram" onblur="opdaterVærdier()"></label>
-        <label>Træ (g): <input type="number" class="træ-gram" onblur="opdaterVærdier()"></label>
-        <br>
+        <label>Glas (g): <input type="number" class="glas-gram" onblur="opdaterVærdier()"></label><br>
+        <label>Træ (g): <input type="number" class="træ-gram" onblur="opdaterVærdier()"></label><br>
         <label>Pris for PP (kr): <input type="number" class="pris-pp" readonly></label><br>
         <label>Pris for PE (kr): <input type="number" class="pris-pe" readonly></label><br>
         <label>Pris for Metal (kr): <input type="number" class="pris-metal" readonly></label><br>
         <label>Pris for Glas (kr): <input type="number" class="pris-glas" readonly></label><br>
         <label>Pris for Træ (kr): <input type="number" class="pris-træ" readonly></label><br>
-
         <label>Total Pris (kr): <input type="number" class="total-pris" readonly></label>
       </div>
     `;
@@ -183,10 +174,10 @@
     produktDiv.querySelector(".antal").value = 0;
     produktDiv.querySelector(".vægt").value = 0;
     produktDiv.querySelector(".produkt-gif").style.display = "none";
-    produktDiv.querySelector(".edit-button").style.display = "none";
-    produktDiv.querySelector(".save-button").style.display = "none";
+    produktDiv.querySelector(".edit-save-button").textContent = "Rediger"; // Nulstil knappens tekst
     produktDiv.querySelector(".materiale-info").style.display = "none";
     produktDiv.querySelectorAll("input[type='number']").forEach(input => input.value = "");
+    produktDiv.setAttribute("data-editing", "false"); // Nulstil redigeringsstatus
     opdaterVærdier();
   }
 
@@ -195,180 +186,144 @@
     produktDiv.querySelector(".antal").value = 0;
     produktDiv.querySelector(".vægt").value = 0;
     produktDiv.querySelector(".produkt-gif").style.display = "none";
-    produktDiv.querySelector(".edit-button").style.display = "none";
-    produktDiv.querySelector(".save-button").style.display = "none";
+    produktDiv.querySelector(".edit-save-button").textContent = "Rediger"; // Nulstil knappens tekst
     produktDiv.querySelector(".materiale-info").style.display = "none";
     produktDiv.querySelectorAll("input[type='number']").forEach(input => input.value = "");
+    produktDiv.setAttribute("data-editing", "false"); // Nulstil redigeringsstatus
     opdaterVærdier();
   }
 
-  function toggleEdit(button) {
+  function toggleEditSave(button) {
     const produktDiv = button.parentElement;
     const materialeInfo = produktDiv.querySelector(".materiale-info");
-    const editButton = produktDiv.querySelector(".edit-button");
-    const saveButton = produktDiv.querySelector(".save-button");
-    const produktGif = produktDiv.querySelector(".produkt-gif"); // Få fat i GIF'en
+    const produktGif = produktDiv.querySelector(".produkt-gif");
 
-    // Skjul materiale-info og vis rediger-knappen
-    materialeInfo.style.display = "block";
-    editButton.style.display = "none";
-    saveButton.style.display = "block";
+    // Tjek om redigeringsmodus er aktivt
+    const isEditing = produktDiv.getAttribute("data-editing") === "true";
 
-    // Skjul GIF'en
-    produktGif.style.display = "none";
-  }
+    if (isEditing) {
+      // Hvis redigeringsmodus er aktivt: Gem ændringer og skift til visningstilstand
+      produktDiv.setAttribute("data-editing", "false");
+      button.textContent = "Rediger"; // Skift knappens tekst til "Rediger"
+      materialeInfo.style.display = "none"; // Skjul materiale-info
+      produktGif.style.display = "block"; // Vis produkt-GIF
+    } else {
+      // Hvis redigeringsmodus ikke er aktivt: Skift til redigeringstilstand
+      produktDiv.setAttribute("data-editing", "true");
+      button.textContent = "Gem"; // Skift knappens tekst til "Gem"
+      materialeInfo.style.display = "block"; // Vis materiale-info
+      produktGif.style.display = "none"; // Skjul produkt-GIF
+    }
 
-  function toggleSave(button) {
-    const produktDiv = button.parentElement;
-    const materialeInfo = produktDiv.querySelector(".materiale-info");
-    const editButton = produktDiv.querySelector(".edit-button");
-    const saveButton = produktDiv.querySelector(".save-button");
-    const produktGif = produktDiv.querySelector(".produkt-gif"); // Få fat i GIF'en
-
-    // Skjul materiale-info og vis gem-knappen
-    materialeInfo.style.display = "none";
-    editButton.style.display = "block";
-    saveButton.style.display = "none";
-
-    // Vis GIF'en igen
-    produktGif.style.display = "block";
+    // Opdater værdier efter skift af tilstand
+    opdaterVærdier();
   }
 
   function opdaterVærdier() {
-    const produkter = document.querySelectorAll(".produkt");
-    let samletPris = 0;
-    let samletAntal = 0;
+      const produkter = document.querySelectorAll(".produkt");
+      let samletPris = 0;
+      let samletAntal = 0;
 
-    produkter.forEach((produktDiv, index) => {
-      const produktValg = produktDiv.querySelector(".produkt-valg").value;
-      const antalLabel = produktDiv.querySelector(".antal-label");
-      const antalInput = produktDiv.querySelector(".antal");
-      const vægtLabel = produktDiv.querySelector(".vægt-label");
-      const vægtInput = produktDiv.querySelector(".vægt");
-      const produktGif = produktDiv.querySelector(".produkt-gif");
-      const editButton = produktDiv.querySelector(".edit-button");
+      produkter.forEach((produktDiv, index) => {
+        const produktValg = produktDiv.querySelector(".produkt-valg").value;
+        const antalLabel = produktDiv.querySelector(".antal-label");
+        const antalInput = produktDiv.querySelector(".antal");
+        const vægtLabel = produktDiv.querySelector(".vægt-label");
+        const vægtInput = produktDiv.querySelector(".vægt");
+        const produktGif = produktDiv.querySelector(".produkt-gif");
+        const editSaveButton = produktDiv.querySelector(".edit-save-button");
+        const materialeInfo = produktDiv.querySelector(".materiale-info");
 
-      if (produktValg) {
-        antalLabel.style.display = "block";
-        antalInput.style.display = "block";
-        vægtLabel.style.display = "block";
-        vægtInput.style.display = "block";
-        produktGif.src = `produkter/${produktValg}.gif`;
-        produktGif.style.display = "block";
-        produktGif.style.width = "300px";
-        produktGif.style.height = "auto";
-        editButton.style.display = "block";
+        // Tjek om redigeringsmodus er aktivt
+        const isEditing = produktDiv.getAttribute("data-editing") === "true";
 
-        let ppGram = 0, peGram = 0, metalGram = 0, glasGram = 0, træGram = 0;
+        if (produktValg) {
+          // Vis felter og GIF
+          antalLabel.style.display = "block";
+          antalInput.style.display = "block";
+          vægtLabel.style.display = "block";
+          vægtInput.style.display = "block";
+          produktGif.src = `produkter/${produktValg}.gif`;
+          produktGif.style.display = isEditing ? "none" : "block"; // Vis/skjul GIF baseret på redigeringsstatus
+          produktGif.style.width = "300px";
+          produktGif.style.height = "auto";
 
-        switch (produktValg) {
-          case "pumpe":
-            ppGram = 7.302;
-            peGram = 1.507;
-            metalGram = 1.132;
-            glasGram = 0.058;
-            træGram = 0;
-            break;
-          case "airless-dispenser":
-            ppGram = 76.51;
-            peGram = 0;
-            metalGram = 0.61;
-            glasGram = 0;
-            træGram = 0;
-            break;
+          // Opdater knappens tekst baseret på redigeringsstatus
+          editSaveButton.textContent = isEditing ? "Gem" : "Rediger";
 
-          case "trigger-sprayer":
-            ppGram = 16.79;
-            peGram = 0.3;
-            metalGram = 2.26;
-            glasGram = 0.05;
-            træGram = 0; //
-            break;
-          case "creme-pumpe":
-            ppGram = 10.27;
-            peGram = 0.32;
-            metalGram = 0.50;
-            glasGram = 0.06;
-            træGram = 0;
-            break;
-          case "creme-krukke":
-            ppGram = 51.4;
-            peGram = 51.4;
-            metalGram = 0;
-            glasGram = 0;
-            træGram = 0;
-            break;
-          case "skumpumpe":
-            ppGram = 22.09;
-            peGram = 0;
-            metalGram = 0.13;
-            glasGram = 0.03;
-            træGram = 0;
-            break;
+          // Vis/skjul materiale-info baseret på redigeringsstatus
+          materialeInfo.style.display = isEditing ? "block" : "none";
 
-          case "bambus":
-            ppGram = 34;
-            peGram = 0;
-            metalGram = 0;
-            glasGram = 0;
-            træGram = 22.2;
-            break;
+          // Indlæs standardvægt for produktet (hvis ikke allerede indtastet)
+          let ppGram = 0, peGram = 0, metalGram = 0, glasGram = 0, træGram = 0;
 
-          case "make-up-emballage":
-            ppGram = 8.95;
-            peGram = 0;
-            metalGram = 18.99;
-            glasGram = 0;
-            træGram = 0;
-            break;
+          switch (produktValg) {
+            case "pumpe":
+              ppGram = 7.302;
+              peGram = 1.507;
+              metalGram = 1.132;
+              glasGram = 0.058;
+              træGram = 0;
+              break;
+            case "airless-dispenser":
+              ppGram = 76.51;
+              peGram = 0;
+              metalGram = 0.61;
+              glasGram = 0;
+              træGram = 0;
+              break;
+            case "trigger-sprayer":
+              ppGram = 16.79;
+              peGram = 0.3;
+              metalGram = 2.26;
+              glasGram = 0.05;
+              træGram = 0;
+              break;
+                  // Tilføj andre produkter her...
+          }
 
-          case "deo-roll-on":
-            ppGram = 26.82;
-            peGram = 4.37;
-            metalGram = 0;
-            glasGram = 0;
-            træGram = 0;
-            break;
+          // Sæt standardvægt, hvis brugeren ikke har indtastet noget
+          if (!produktDiv.querySelector(".pp-gram").value) produktDiv.querySelector(".pp-gram").value = ppGram;
+          if (!produktDiv.querySelector(".pe-gram").value) produktDiv.querySelector(".pe-gram").value = peGram;
+          if (!produktDiv.querySelector(".metal-gram").value) produktDiv.querySelector(".metal-gram").value = metalGram;
+          if (!produktDiv.querySelector(".glas-gram").value) produktDiv.querySelector(".glas-gram").value = glasGram;
+          if (!produktDiv.querySelector(".træ-gram").value) produktDiv.querySelector(".træ-gram").value = træGram;
         }
 
-        if (!produktDiv.querySelector(".pp-gram").value) produktDiv.querySelector(".pp-gram").value = ppGram;
-        if (!produktDiv.querySelector(".pe-gram").value) produktDiv.querySelector(".pe-gram").value = peGram;
-        if (!produktDiv.querySelector(".metal-gram").value) produktDiv.querySelector(".metal-gram").value = metalGram;
-        if (!produktDiv.querySelector(".glas-gram").value) produktDiv.querySelector(".glas-gram").value = glasGram;
-        if (!produktDiv.querySelector(".træ-gram").value) produktDiv.querySelector(".træ-gram").value = træGram; // Tilføjet her
-      }
+        // Beregn priser baseret på indtastede værdier
+        let ppGram = parseFloat(produktDiv.querySelector(".pp-gram").value) || 0;
+        let peGram = parseFloat(produktDiv.querySelector(".pe-gram").value) || 0;
+        let metalGram = parseFloat(produktDiv.querySelector(".metal-gram").value) || 0;
+        let glasGram = parseFloat(produktDiv.querySelector(".glas-gram").value) || 0;
+        let træGram = parseFloat(produktDiv.querySelector(".træ-gram").value) || 0;
 
-      let ppGram = parseFloat(produktDiv.querySelector(".pp-gram").value) || 0;
-      let peGram = parseFloat(produktDiv.querySelector(".pe-gram").value) || 0;
-      let metalGram = parseFloat(produktDiv.querySelector(".metal-gram").value) || 0;
-      let glasGram = parseFloat(produktDiv.querySelector(".glas-gram").value) || 0;
-      let træGram = parseFloat(produktDiv.querySelector(".træ-gram").value) || 0; // Tilføjet her
+        const prisPP = (ppGram * bearbejdningsPriser.pp * antalInput.value).toFixed(2);
+        const prisPE = (peGram * bearbejdningsPriser.pe * antalInput.value).toFixed(2);
+        const prisMetal = (metalGram * bearbejdningsPriser.metal * antalInput.value).toFixed(2);
+        const prisGlas = (glasGram * bearbejdningsPriser.glas * antalInput.value).toFixed(2);
+        const prisTræ = (træGram * bearbejdningsPriser.træ * antalInput.value).toFixed(2);
+        const totalPris = (parseFloat(prisPP) + parseFloat(prisPE) + parseFloat(prisMetal) + parseFloat(prisGlas) + parseFloat(prisTræ)).toFixed(2);
 
-      const prisPP = (ppGram * bearbejdningsPriser.pp * antalInput.value).toFixed(2);
-      const prisPE = (peGram * bearbejdningsPriser.pe * antalInput.value).toFixed(2);
-      const prisMetal = (metalGram * bearbejdningsPriser.metal * antalInput.value).toFixed(2);
-      const prisGlas = (glasGram * bearbejdningsPriser.glas * antalInput.value).toFixed(2);
-      const prisTræ = (træGram * bearbejdningsPriser.træ * antalInput.value).toFixed(2); // Tilføjet her
-      const totalPris = (parseFloat(prisPP) + parseFloat(prisPE) + parseFloat(prisMetal) + parseFloat(prisGlas) + parseFloat(prisTræ)).toFixed(2); // Tilføjet prisTræ
+        // Opdater pris- og vægtfelter
+        produktDiv.querySelector(".pris-pp").value = prisPP;
+        produktDiv.querySelector(".pris-pe").value = prisPE;
+        produktDiv.querySelector(".pris-metal").value = prisMetal;
+        produktDiv.querySelector(".pris-glas").value = prisGlas;
+        produktDiv.querySelector(".pris-træ").value = prisTræ;
+        produktDiv.querySelector(".total-pris").value = totalPris;
 
-      produktDiv.querySelector(".pris-pp").value = prisPP;
-      produktDiv.querySelector(".pris-pe").value = prisPE;
-      produktDiv.querySelector(".pris-metal").value = prisMetal;
-      produktDiv.querySelector(".pris-glas").value = prisGlas;
-      produktDiv.querySelector(".pris-træ").value = prisTræ; // Tilføjet her
-      produktDiv.querySelector(".total-pris").value = totalPris;
+        const totalVægt = ppGram + peGram + metalGram + glasGram + træGram;
+        vægtInput.value = totalVægt.toFixed(3);
 
-      const totalVægt = ppGram + peGram + metalGram + glasGram + træGram; // Tilføjet træGram
-      vægtInput.value = totalVægt.toFixed(3);
+        // Opdater samlet pris og antal
+        samletPris += parseFloat(totalPris);
+        samletAntal += parseInt(antalInput.value) || 0;
+      });
 
-      samletPris += parseFloat(totalPris);
-      samletAntal += parseInt(antalInput.value) || 0;
-    });
-
-    document.getElementById("samlet-pris").value = samletPris.toFixed(2);
-    document.getElementById("samlet-antal").value = samletAntal || 0;
-  }
-
+      // Opdater samlet pris og antal i bunden af siden
+      document.getElementById("samlet-pris").value = samletPris.toFixed(2);
+      document.getElementById("samlet-antal").value = samletAntal || 0;
+    }
   document.querySelectorAll(".pp-gram, .pe-gram, .metal-gram, .glas-gram, .træ-gram").forEach(input => {
     input.addEventListener("blur", opdaterVærdier);
   });
