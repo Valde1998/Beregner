@@ -17,7 +17,6 @@
       <label for="produkt-valg-1">Vælg produkt:</label>
       <select id="produkt-valg-1" class="produkt-valg" onchange="nulstilOgOpdater(this)">
         <option value="">Vælg et produkt</option>
-        <option value="pumpe">Pumpe</option>
         <option value="airless-dispenser">Airless dispenser</option>
         <option value="bambus">Bambus</option>
         <option value="creme-krukke">Creme krukke</option>
@@ -107,7 +106,6 @@
       <label for="produkt-valg-${produktCount}">Vælg produkt:</label>
       <select id="produkt-valg-${produktCount}" class="produkt-valg" onchange="nulstilOgOpdater(this)">
         <option value="">Vælg et produkt</option>
-        <option value="pumpe">Pumpe</option>
         <option value="airless-dispenser">Airless dispenser</option>
         <option value="bambus">Bambus</option>
         <option value="creme-krukke">Creme krukke</option>
@@ -256,22 +254,70 @@
           let plastikGram = 0, metalGram = 0, glasGram = 0, træGram = 0;
 
           switch (produktValg) {
-            case "pumpe":
-              plastikGram = 7.302 + 1.507; // PP + PE
+            case "lotion-pumpe":
+              plastikGram = 7.302 + 1.507;
               metalGram = 1.132;
               glasGram = 0.058;
               træGram = 0;
               break;
             case "airless-dispenser":
-              plastikGram = 76.51; // PP
+              plastikGram = 76.51;
               metalGram = 0.61;
               glasGram = 0;
               træGram = 0;
               break;
             case "trigger-sprayer":
-              plastikGram = 16.79 + 0.3; // PP + PE
+              plastikGram = 16.79 + 0.3;
               metalGram = 2.26;
               glasGram = 0.05;
+              træGram = 0;
+              break;
+            case "skumpumpe":
+              plastikGram = 22.09;
+              metalGram = 0.13;
+              glasGram = 0.03;
+              træGram = 0;
+              break;
+            case "bambus":
+              plastikGram = 34;
+              metalGram = 0;
+              glasGram = 0;
+              træGram = 22.2;
+              break;
+            case "make-up-emballage":
+              plastikGram = 8.95;
+              metalGram = 18.99;
+              glasGram = 0;
+              træGram = 0;
+              break;
+            case "airless-flaske":
+              plastikGram = 76.51;
+              metalGram = 0.61;
+              glasGram = 0;
+              træGram = 0;
+              break;
+            case "deo-roll-on":
+              plastikGram = 26.82 + 4.37;
+              metalGram = 0;
+              glasGram = 0;
+              træGram = 0;
+              break;
+            case "mist-sprayer":
+              plastikGram = 7.37;
+              metalGram = 0.35;
+              glasGram = 0.06;
+              træGram = 0;
+              break;
+            case "oliepumpe":
+              plastikGram = 11.5;
+              metalGram = 1.2;
+              glasGram = 0.1;
+              træGram = 0;
+              break;
+            case "kapsler":
+              plastikGram = 4.28;
+              metalGram = 0;
+              glasGram = 0;
               træGram = 0;
               break;
                   // Tilføj andre produkter her...
