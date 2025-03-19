@@ -77,6 +77,13 @@
   <button type="button" onclick="sendEmail()">Send resultat</button>
 </form>
 
+<div id="custom-alert" class="modal">
+  <div class="modal-content">
+    <span class="close-button" onclick="closeAlert()">&times;</span>
+    <p id="alert-message">This is a custom alert message.</p>
+  </div>
+</div>
+
 <script>
   let produktCount = 1;
 
@@ -457,7 +464,7 @@
   function sendEmail() {
     const userEmail = document.getElementById("user-email").value;
     if (!userEmail) {
-      alert("Indtast din e-mailadresse.");
+      showAlert("Indtast din e-mailadresse.");
       return;
     }
 
@@ -494,7 +501,7 @@
         );
       }
     });
-
+// V. D. T. Ch.
     const samletPris = document.getElementById("samlet-pris").value;
     const samletAntal = document.getElementById("samlet-antal").value;
 
@@ -510,11 +517,11 @@
     // Send e-mail via EmailJS
     emailjs.send("service_0ymhfiq", "template_008il29", emailData)
             .then(response => {
-              alert("E-mail er sendt din vej!");
+              showAlert("E-mail er sendt din vej!");
               console.log("EmailJS Response:", response);
             })
             .catch(error => {
-              alert("Fejl ved afsendelse af e-mail.");
+              showAlert("Fejl ved afsendelse af e-mail.");
               console.error("EmailJS Error:", error);
             });
   }
@@ -526,7 +533,18 @@
       }
     });
   });
-  // V. D. T. Ch.
+  function showAlert(message) {
+    const modal = document.getElementById("custom-alert");
+    const alertMessage = document.getElementById("alert-message");
+    alertMessage.textContent = message;
+    modal.style.display = "block";
+  }
+
+  function closeAlert() {
+    const modal = document.getElementById("custom-alert");
+    modal.style.display = "none";
+  }
+
 </script>
 </body>
 </html>
