@@ -1,5 +1,4 @@
 /* Generel styling */
-/* Tilføjelse af skrifttyper */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 body {
@@ -12,240 +11,140 @@ body {
     line-height: 1.6;
 }
 
-h1, h2 {
-    color: #007bff;
-    margin-bottom: 20px;
+/* Integreret layout-container */
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: rgba(252, 251, 251, 0.95);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-form {
-    background-color: #fcfbfb;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Venstre sektion - produkter */
+.product-section {
+    grid-column: 1;
 }
 
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #495057;
+/* Højre sektion - samlet info */
+.summary-section {
+    grid-column: 2;
+    position: sticky;
+    top: 20px;
+    align-self: start;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-input, select {
-    width: 100%;
-    padding: 6px;
-    margin-bottom: 7px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 14px;
+/* Fælles styling for begge sektioner */
+.product-section, .summary-section {
+    animation: fadeIn 0.6s ease-out;
 }
 
-input:focus, select:focus {
-    border-color: #80bdff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
-}
-
-button {
-    background-color: #007bff;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-button.delete-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-button.reset-button {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    position: absolute;
-    top: 10px;
-    right: 45px;
-}
-
-button.reset-button img {
-    width: 24px;
-    height: 24px;
-    transition: transform 0.3s ease;
-}
-
-button.reset-button:hover img {
-    transform: rotate(90deg);
-}
-
+/* Produkt grid */
 .produkt-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
-
+    margin-bottom: 25px;
 }
-
 
 .produkt {
-    flex: 1 1 300px;
-    min-width: 300px;
-    max-width: 300px;
-    background: url('../src/baggrund.jpg') no-repeat center center fixed;
-    background-size: cover;
+    background: white;
     padding: 20px;
-    border: 1px solid #ced4da;
     border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
     position: relative;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.produkt:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+/* Samlet info styling */
+.summary-group {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-.materiale-info {
-    display: none;
-    margin-top: 15px;
-    padding: 15px;
-    background-color: #f8f9fa;
-    border-radius: 4px;
-    border: 1px solid #ced4da;
+.summary-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
-.edit-button, .save-button {
-    margin-top: 5px;
-    background-color: #28a745;
+.summary-title {
+    font-size: 1.1rem;
+    color: #007bff;
+    margin-bottom: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Knapper */
+#add-product-button {
+    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     width: 100%;
-    padding: 10px;
-    font-size: 14px;
 }
 
-.edit-button:hover, .save-button:hover {
-    background-color: #218838;
+#add-product-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-#resultat {
-    background-color: #e9ecef;
-    padding: 20px;
+/* Billede */
+#packwise-image {
+    display: block;
+    margin: 30px auto;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
     border-radius: 8px;
-    margin-top: 20px;
-    font-size: 18px;
-    color: #495057;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsivt design */
 @media (max-width: 768px) {
+    .main-container {
+        grid-template-columns: 1fr;
+        padding: 15px;
+    }
+
+    .summary-section {
+        grid-column: 1;
+        position: static;
+        margin-top: 30px;
+    }
+
     .produkt {
-        flex: 1 1 100%;
-        max-width: 100%;
-    }
-
-    button {
-        width: 100%;
-        margin-bottom: 10px;
+        min-width: 100%;
     }
 }
 
-/* Tilføjelse af animationer */
+/* Animationer */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.produkt {
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-/* Tilføjelse af hover-effekter */
-input[type="number"]:hover, select:hover {
-    border-color: #007bff;
-}
-
-/* Tilføjelse af farvevariabler */
-:root {
-    --primary-color: #4caf50; /* Grøn */
-    --secondary-color: #8bc34a; /* Lys grøn */
-    --success-color: #4caf50; /* Grøn */
-    --danger-color: #f44336; /* Rød */
-    --warning-color: #ff9800; /* Orange */
-    --info-color: #00bcd4; /* Turkis */
-    --light-color: #f1f8e9; /* Meget lys grøn */
-    --dark-color: #2e7d32; /* Mørk grøn */
-}
-
-button {
-    background-color: var(--primary-color);
-}
-
-button.delete-button {
-    background-color: var(--danger-color);
-}
-
-.edit-button, .save-button {
-    background-color: var(--success-color);
-}
-
-/* Tilføjelse af gradient-effekter */
-button {
-    background: linear-gradient(135deg, var(--primary-color), #0056b3);
-}
-
-button:hover {
-    background: linear-gradient(135deg, #0056b3, var(--primary-color));
-}
-/* Tilføj dette til din CSS-fil */
-#add-product-container {
-    margin: 20px;
-}
-
-#add-product-button {
-    background-color: var(--primary-color);
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-#add-product-button:hover {
-    background-color: #0056b3;
-}
-#packwise-image {
-    display: block;
-    margin: 10px auto;
-    width: 500px; /* Fast bredde */
-    height: auto; /* Bevarer billedets proportioner */
-}
-
+/* Modal styling */
 .modal {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -253,21 +152,21 @@ button:hover {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
-    backdrop-filter: blur(5px); /* Blur background */
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
 }
 
 .modal-content {
-    background-color: #007bff; /* Blue background */
+    background-color: #007bff;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
     max-width: 500px;
-    color: white; /* White text color */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
-    animation: slideIn 0.5s ease-out; /* Slide-in animation */
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.5s ease-out;
 }
 
 .close-button {
@@ -280,7 +179,7 @@ button:hover {
 
 .close-button:hover,
 .close-button:focus {
-    color: #ff0000; /* Red color on hover */
+    color: #ff0000;
     cursor: pointer;
 }
 
@@ -293,4 +192,102 @@ button:hover {
         transform: translateY(0);
         opacity: 1;
     }
+}
+
+/* Knap styling */
+button.delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f44336;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+button.delete-button:hover {
+    background-color: #d32f2f;
+}
+
+button.reset-button {
+    position: absolute;
+    top: 10px;
+    right: 45px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.reset-button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+button.reset-button img {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+}
+
+button.reset-button:hover img {
+    transform: rotate(90deg);
+}
+
+/* Materiale info */
+.materiale-info {
+    display: none;
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+}
+
+/* Input styling */
+input, select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+input:focus, select:focus {
+    border-color: #007bff;
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Rediger/Gem knapper */
+.edit-button, .save-button {
+    margin-top: 5px;
+    background-color: #28a745;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
