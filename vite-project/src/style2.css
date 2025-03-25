@@ -320,3 +320,14 @@ input, select {
     background-color: #f8f9fa;
     border-radius: 6px;
 }
+.right-section label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #4a5568; /* Lidt blålig grå */
+    font-weight: 500;
+    margin-bottom: 6px;
+    display: block;
+    text-transform: uppercase; /* Gør teksten til store bogstaver hvis du ønsker */
+    letter-spacing: 0.5px;
+    font-family: inherit;
+}

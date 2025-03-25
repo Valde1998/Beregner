@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d7c07631-fc78-4d8f-8da2-f7d3075db4d7" name="Changes" comment="K">
+      <change beforePath="$PROJECT_DIR$/vite-project/src/Beregner.html" beforeDir="false" afterPath="$PROJECT_DIR$/vite-project/src/Beregner.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite-project/src/Packwise.png" beforeDir="false" afterPath="$PROJECT_DIR$/vite-project/src/Packwise.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite-project/src/style2.css" beforeDir="false" afterPath="$PROJECT_DIR$/vite-project/src/style2.css" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/vite-project/src/Beregner.html" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="ProjectId" id="2rt1LAJnKFd5rXFSd3xFDSUde6v" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Inteli/Beregner/vite-project/src&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Settings.Sequence.Configuration&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Inteli\Beregner\vite-project\src" />
+      <recent name="C:\Inteli\Beregner\vite-project\src\produkter" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Inteli\Beregner\vite-project\src" />
+      <recent name="C:\Inteli\Beregner\vite-project\src\backend" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d7c07631-fc78-4d8f-8da2-f7d3075db4d7" name="Changes" comment="" />
+      <created>1737363503831</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1737363503831</updated>
+      <workItem from="1737363506024" duration="12483000" />
+      <workItem from="1737446737988" duration="13712000" />
+      <workItem from="1737533461126" duration="15019000" />
+      <workItem from="1737551798595" duration="7488000" />
+      <workItem from="1737619952797" duration="9206000" />
+      <workItem from="1737630243787" duration="1067000" />
+      <workItem from="1737632569727" duration="3250000" />
+      <workItem from="1737709640431" duration="2535000" />
+      <workItem from="1737712264391" duration="9744000" />
+      <workItem from="1737965333583" duration="9638000" />
+      <workItem from="1737975295122" duration="7426000" />
+      <workItem from="1738051426566" duration="9778000" />
+      <workItem from="1738138075771" duration="13060000" />
+      <workItem from="1738155347943" duration="6335000" />
+      <workItem from="1738223966268" duration="17246000" />
+      <workItem from="1738655953392" duration="23518000" />
+      <workItem from="1738742518166" duration="11000000" />
+      <workItem from="1738756211464" duration="10067000" />
+      <workItem from="1738829269436" duration="10457000" />
+      <workItem from="1738846306029" duration="1837000" />
+      <workItem from="1738915359232" duration="12526000" />
+      <workItem from="1739174650102" duration="11252000" />
+      <workItem from="1739193575656" duration="130000" />
+      <workItem from="1739193768327" duration="216000" />
+      <workItem from="1739194015926" duration="1940000" />
+      <workItem from="1739401685860" duration="1768000" />
+      <workItem from="1739531600207" duration="10339000" />
+      <workItem from="1739779786875" duration="91000" />
+      <workItem from="1739779971034" duration="3627000" />
+      <workItem from="1739792330762" duration="4334000" />
+      <workItem from="1739865627647" duration="512000" />
+      <workItem from="1739866626042" duration="9670000" />
+      <workItem from="1739890613858" duration="354000" />
+      <workItem from="1739951777045" duration="18641000" />
+      <workItem from="1740071095032" duration="1759000" />
+      <workItem from="1740087128052" duration="1963000" />
+      <workItem from="1740125396526" duration="3176000" />
+      <workItem from="1740138480900" duration="3846000" />
+      <workItem from="1740384630244" duration="4657000" />
+      <workItem from="1740389710226" duration="10782000" />
+      <workItem from="1740471670797" duration="2974000" />
+      <workItem from="1740492557529" duration="2212000" />
+      <workItem from="1740556762229" duration="5802000" />
+      <workItem from="1740563323791" duration="8824000" />
+      <workItem from="1740588074973" duration="791000" />
+      <workItem from="1740643670041" duration="6248000" />
+      <workItem from="1740730144864" duration="1424000" />
+      <workItem from="1740988874165" duration="17879000" />
+      <workItem from="1741013449680" duration="395000" />
+      <workItem from="1741075146129" duration="11544000" />
+      <workItem from="1741161950199" duration="8839000" />
+      <workItem from="1741249439523" duration="5299000" />
+      <workItem from="1741339167955" duration="522000" />
+      <workItem from="1741339761107" duration="9214000" />
+      <workItem from="1741593743568" duration="6864000" />
+      <workItem from="1741679816495" duration="3033000" />
+      <workItem from="1741773328831" duration="1429000" />
+      <workItem from="1741853204190" duration="4822000" />
+      <workItem from="1741944401006" duration="2425000" />
+      <workItem from="1742198915753" duration="4763000" />
+      <workItem from="1742223777439" duration="649000" />
+      <workItem from="1742285185702" duration="6331000" />
+      <workItem from="1742372100746" duration="8180000" />
+      <workItem from="1742894299164" duration="17436000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
