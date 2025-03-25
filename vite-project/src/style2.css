@@ -67,7 +67,6 @@ body {
     margin-left: 20px;
 }
 
-/* ========== KNAPSTYLING ========== */
 /* Primær knap (tilføj produkt) */
 #add-product-button {
     background: rgba(159, 177, 137, 0.95);
@@ -155,22 +154,50 @@ button.reset-button:hover img {
     transform: rotate(90deg);
 }
 
-/* Rediger/Gem knapper */
-.edit-button, .save-button {
+/* Rediger knap med ID */
+#edit-product-button {
     background: rgba(159, 177, 137, 0.95);
+    color: #fff;
     border: none;
     padding: 12px;
-    border-radius: 6px;
+    border-radius: 8px;
+    font-size: 16px;
     cursor: pointer;
     width: 100%;
     margin-top: 10px;
-    font-weight: 500;
     transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+    display: block;
 }
 
-.edit-button:hover, .save-button:hover {
+#edit-product-button:hover {
     background: rgba(139, 157, 117, 0.95);
     transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Gem knap med ID */
+#save-product-button {
+    background: rgba(159, 177, 137, 0.95);
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+    display: none; /* Skjult som standard */
+}
+
+#save-product-button:hover {
+    background: rgba(139, 157, 117, 0.95);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* Modal knapper */
@@ -189,7 +216,6 @@ button.reset-button:hover img {
     background: rgba(139, 157, 117, 0.95);
 }
 
-/* ========== RESTEN AF DIN CSS ========== */
 /* Samlet info styling */
 .summary-group {
     margin-bottom: 30px;
@@ -233,6 +259,10 @@ button.reset-button:hover img {
 
     .produkt-container {
         grid-template-columns: 1fr;
+    }
+
+    #add-product-button {
+        width: 100%;
     }
 }
 
