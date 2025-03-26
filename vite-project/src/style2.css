@@ -27,6 +27,7 @@ body {
     width: 100%;
     margin: 0 auto;
     position: relative;
+    padding-top: 20px;
 }
 
 /* Venstre sektion - produkter */
@@ -330,4 +331,10 @@ input, select {
     text-transform: uppercase; /* Gør teksten til store bogstaver hvis du ønsker */
     letter-spacing: 0.5px;
     font-family: inherit;
+}
+#packwise-image {
+    width: 50%; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 0 auto; /* Center the image */
 }
