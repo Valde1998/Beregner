@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7c07631-fc78-4d8f-8da2-f7d3075db4d7" name="Changes" comment="K">
-      <change beforePath="$PROJECT_DIR$/vite-project/src/Beregner.html" beforeDir="false" afterPath="$PROJECT_DIR$/vite-project/src/Beregner.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite-project/src/Packwise.png" beforeDir="false" afterPath="$PROJECT_DIR$/vite-project/src/Packwise.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite-project/src/style2.css" beforeDir="false" afterPath="$PROJECT_DIR$/vite-project/src/style2.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite-project/src/javascript.svg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
