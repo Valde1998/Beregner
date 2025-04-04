@@ -50,17 +50,17 @@
           <label for="vægt-1" class="vægt-label" style="display: none;">Vægt (g):</label>
           <input type="number" id="vægt-1" class="vægt" min="0" step="0.001" value="0" onblur="opdaterVærdier()" required readonly style="display: none;">
           <img class="produkt-gif" src="" alt="Produkt GIF" style="width: auto; height: auto; display: none;">
-          <button type="button" id="edit-product-button" class="edit-save-button" onclick="toggleEditSave(this)" style="display: none;">Rediger</button>
+          <button type="button" id="edit-product-button" class="edit-save-button" onclick="toggleEditSave(this)" style="display: none;">Rediger dine produktdata</button>
           <div id="materiale-info-${produktCount}" class="materiale-info">
             <label>Plastik (g): <input type="number" class="plastik-gram" onblur="opdaterVærdier()"></label><br>
             <label>Metal (g): <input type="number" class="metal-gram" onblur="opdaterVærdier()"></label><br>
             <label>Glas (g): <input type="number" class="glas-gram" onblur="opdaterVærdier()"></label><br>
             <label>Træ (g): <input type="number" class="træ-gram" onblur="opdaterVærdier()"></label><br>
-            <label>Pris for Plastik (kr): <input type="number" class="pris-plastik" readonly></label><br>
-            <label>Pris for Metal (kr): <input type="number" class="pris-metal" readonly></label><br>
-            <label>Pris for Glas (kr): <input type="number" class="pris-glas" readonly></label><br>
-            <label>Pris for Træ (kr): <input type="number" class="pris-træ" readonly></label><br>
-            <label>Total Pris (kr): <input type="number" class="total-pris" readonly></label>
+            <label>Pris for Plastik (DDK): <input type="number" class="pris-plastik" readonly></label><br>
+            <label>Pris for Metal (DDk): <input type="number" class="pris-metal" readonly></label><br>
+            <label>Pris for Glas (DDK): <input type="number" class="pris-glas" readonly></label><br>
+            <label>Pris for Træ (DDK): <input type="number" class="pris-træ" readonly></label><br>
+            <label>Total Pris (DDk): <input type="number" class="total-pris" readonly></label>
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@
 
   <div class="right-section">
     <form>
-      <h2>Samlet Pris (kr):</h2>
+      <h2>Samlet Pris (DDK):</h2>
       <input type="number" id="samlet-pris" min="0" readonly>
 
       <h2>Antal Produkter:</h2>
@@ -80,7 +80,7 @@
       <h2>Din e-mail:</h2>
       <input type="email" id="user-email" required>
 
-      <button type="button" id="send-result-button" onclick="sendEmail()">Send resultat</button>
+      <button type="button" id="send-result-button" onclick="sendEmail()">Send beregning</button>
     </form>
   </div>
 </div>
@@ -148,17 +148,17 @@
       <label for="vægt-${produktCount}" class="vægt-label" style="display: none;">Vægt (g):</label>
       <input type="number" id="vægt-${produktCount}" class="vægt" min="0" step="0.001" value="0" onblur="opdaterVærdier()" required readonly style="display: none;">
       <img class="produkt-gif" src="" alt="Produkt GIF" style="width: 100px; height: auto; display: none;">
-      <button type="button" id="edit-product-button" class="edit-save-button" onclick="toggleEditSave(this)" style="display: none;">Rediger</button>
+      <button type="button" id="edit-product-button" class="edit-save-button" onclick="toggleEditSave(this)" style="display: none;">Rediger dine produktdata</button>
       <div id="materiale-info-${produktCount}" class="materiale-info">
         <label>Plastik (g): <input type="number" class="plastik-gram" onblur="opdaterVærdier()"></label><br>
         <label>Metal (g): <input type="number" class="metal-gram" onblur="opdaterVærdier()"></label><br>
         <label>Glas (g): <input type="number" class="glas-gram" onblur="opdaterVærdier()"></label><br>
         <label>Træ (g): <input type="number" class="træ-gram" onblur="opdaterVærdier()"></label><br>
-        <label>Pris for Plastik (kr): <input type="number" class="pris-plastik" readonly></label><br>
-        <label>Pris for Metal (kr): <input type="number" class="pris-metal" readonly></label><br>
-        <label>Pris for Glas (kr): <input type="number" class="pris-glas" readonly></label><br>
-        <label>Pris for Træ (kr): <input type="number" class="pris-træ" readonly></label><br>
-        <label>Total Pris (kr): <input type="number" class="total-pris" readonly></label>
+        <label>Pris for Plastik (DDK): <input type="number" class="pris-plastik" readonly></label><br>
+        <label>Pris for Metal (DDK): <input type="number" class="pris-metal" readonly></label><br>
+        <label>Pris for Glas (DDK): <input type="number" class="pris-glas" readonly></label><br>
+        <label>Pris for Træ (DDK): <input type="number" class="pris-træ" readonly></label><br>
+        <label>Total Pris (DDK): <input type="number" class="total-pris" readonly></label>
       </div>
     `;
     container.appendChild(produktDiv);
@@ -176,7 +176,7 @@
     produktDiv.querySelector(".antal").value = 0;
     produktDiv.querySelector(".vægt").value = 0;
     produktDiv.querySelector(".produkt-gif").style.display = "none";
-    produktDiv.querySelector(".edit-save-button").textContent = "Rediger";
+    produktDiv.querySelector(".edit-save-button").textContent = "Rediger dine produktdata";
     produktDiv.querySelector(".materiale-info").style.display = "none";
     produktDiv.querySelectorAll("input[type='number']").forEach(input => input.value = "");
     produktDiv.setAttribute("data-editing", "false");
@@ -188,7 +188,7 @@
     produktDiv.querySelector(".antal").value = 0;
     produktDiv.querySelector(".vægt").value = 0;
     produktDiv.querySelector(".produkt-gif").style.display = "none";
-    produktDiv.querySelector(".edit-save-button").textContent = "Rediger";
+    produktDiv.querySelector(".edit-save-button").textContent = "Rediger dine produktdata";
     produktDiv.querySelector(".materiale-info").style.display = "none";
     produktDiv.querySelectorAll("input[type='number']").forEach(input => input.value = "");
     produktDiv.setAttribute("data-editing", "false");
@@ -203,7 +203,7 @@
 
     if (isEditing) {
       produktDiv.setAttribute("data-editing", "false");
-      button.textContent = "Rediger";
+      button.textContent = "Rediger dine produktdata";
       materialeInfo.style.display = "none";
       produktGif.style.display = "block";
     } else {
@@ -240,7 +240,7 @@
         produktGif.style.display = isEditing ? "none" : "block";
         produktGif.style.width = "300px";
         produktGif.style.height = "auto";
-        editSaveButton.textContent = isEditing ? "Gem" : "Rediger";
+        editSaveButton.textContent = isEditing ? "Gem" : "Rediger dine produktdata";
         materialeInfo.style.display = isEditing ? "block" : "none";
         editSaveButton.style.display = "block";
 
@@ -458,13 +458,13 @@
       const prisTræ = produktDiv.querySelector(".pris-træ").value || 0;
 
       if (produktNavn) {
-        produkter.push(`${antal}x ${produktNavn} - Vægt: ${vægt}g - Pris: ${pris}kr`);
+        produkter.push(`${antal}x ${produktNavn} - Vægt: ${vægt}g - Pris: ${pris}DDK`);
         produktDetaljer.push(
                 `${antal}x ${produktNavn}:\n` +
-                `  - Plastik: ${plastikGram}g (${prisPlastik} kr)\n` +
-                `  - Metal: ${metalGram}g (${prisMetal} kr)\n` +
-                `  - Glas: ${glasGram}g (${prisGlas} kr)\n` +
-                `  - Træ: ${træGram}g (${prisTræ} kr)\n`
+                `  - Plastik: ${plastikGram}g (${prisPlastik} DDK)\n` +
+                `  - Metal: ${metalGram}g (${prisMetal} DDK)\n` +
+                `  - Glas: ${glasGram}g (${prisGlas} DDK)\n` +
+                `  - Træ: ${træGram}g (${prisTræ} DDK)\n`
         );
       }
     });
@@ -472,17 +472,38 @@
     const samletPris = document.getElementById("samlet-pris").value;
     const samletAntal = document.getElementById("samlet-antal").value;
 
+    // HTML-signatur
+    const signature_html = `
+        <div style="font-family: Arial, sans-serif; color: #333; margin-top: 30px; padding-top: 15px; border-top: 1px solid #e0e0e0;">
+            <p style="margin: 5px 0;"><strong>Med venlig hilsen</strong></p>
+            <p style="margin: 5px 0; font-weight: bold;">Peter Odefey</p>
+            <p style="margin: 5px 0;">+45 42 39 69 66 | <a href="mailto:po@packwise.dk" style="color: #0066cc; text-decoration: none;">po@packwise.dk</a></p>
+            <p style="margin: 5px 0;"><a href="https://www.packwise.dk/" style="color: #0066cc; text-decoration: none;">www.packwise.dk</a></p>
+
+            <div style="margin-top: 10px;">
+                <strong>PACKWISE</strong>
+            </div>
+
+            <p style="margin-top: 15px; font-size: 12px; color: #666;">
+                PACKWISE Int. ApS<br>
+                Ehlersvej 11, DK-2900 Hellerup<br>
+                <em>Please consider the environment before printing this email.</em>
+            </p>
+        </div>
+    `;
+
     const emailData = {
       user_email: userEmail,
       product_list: produkter.join("\n"),
       product_details: produktDetaljer.join("\n"),
       total_price: samletPris,
-      total_items: samletAntal
+      total_items: samletAntal,
+      signature_html: signature_html  // Tilføjet HTML-signatur
     };
 
     emailjs.send("service_0ymhfiq", "template_008il29", emailData)
             .then(response => {
-              showAlert("E-mail er sendt din vej!");
+              showAlert("E-mail sendt succesfuldt!");
               console.log("EmailJS Response:", response);
             })
             .catch(error => {
