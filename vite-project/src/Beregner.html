@@ -56,11 +56,11 @@
             <label>Metal (g): <input type="number" class="metal-gram" onblur="opdaterVærdier()"></label><br>
             <label>Glas (g): <input type="number" class="glas-gram" onblur="opdaterVærdier()"></label><br>
             <label>Træ (g): <input type="number" class="træ-gram" onblur="opdaterVærdier()"></label><br>
-            <label>Pris for Plastik (DDK): <input type="number" class="pris-plastik" readonly></label><br>
-            <label>Pris for Metal (DDk): <input type="number" class="pris-metal" readonly></label><br>
-            <label>Pris for Glas (DDK): <input type="number" class="pris-glas" readonly></label><br>
-            <label>Pris for Træ (DDK): <input type="number" class="pris-træ" readonly></label><br>
-            <label>Total Pris (DDk): <input type="number" class="total-pris" readonly></label>
+            <label>Pris for Plastik (DKK): <input type="number" class="pris-plastik" readonly></label><br>
+            <label>Pris for Metal (DKK): <input type="number" class="pris-metal" readonly></label><br>
+            <label>Pris for Glas (DKK): <input type="number" class="pris-glas" readonly></label><br>
+            <label>Pris for Træ (DKK): <input type="number" class="pris-træ" readonly></label><br>
+            <label>Total Pris (DKK): <input type="number" class="total-pris" readonly></label>
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@
 
   <div class="right-section">
     <form>
-      <h2>Samlet Pris (DDK):</h2>
+      <h2>Samlet Pris (DKK):</h2>
       <input type="number" id="samlet-pris" min="0" readonly>
 
       <h2>Antal Produkter:</h2>
@@ -154,11 +154,11 @@
         <label>Metal (g): <input type="number" class="metal-gram" onblur="opdaterVærdier()"></label><br>
         <label>Glas (g): <input type="number" class="glas-gram" onblur="opdaterVærdier()"></label><br>
         <label>Træ (g): <input type="number" class="træ-gram" onblur="opdaterVærdier()"></label><br>
-        <label>Pris for Plastik (DDK): <input type="number" class="pris-plastik" readonly></label><br>
-        <label>Pris for Metal (DDK): <input type="number" class="pris-metal" readonly></label><br>
-        <label>Pris for Glas (DDK): <input type="number" class="pris-glas" readonly></label><br>
-        <label>Pris for Træ (DDK): <input type="number" class="pris-træ" readonly></label><br>
-        <label>Total Pris (DDK): <input type="number" class="total-pris" readonly></label>
+        <label>Pris for Plastik (DKK): <input type="number" class="pris-plastik" readonly></label><br>
+        <label>Pris for Metal (DKK): <input type="number" class="pris-metal" readonly></label><br>
+        <label>Pris for Glas (DKK): <input type="number" class="pris-glas" readonly></label><br>
+        <label>Pris for Træ (DKK): <input type="number" class="pris-træ" readonly></label><br>
+        <label>Total Pris (DKK): <input type="number" class="total-pris" readonly></label>
       </div>
     `;
     container.appendChild(produktDiv);
@@ -458,13 +458,13 @@
       const prisTræ = produktDiv.querySelector(".pris-træ").value || 0;
 
       if (produktNavn) {
-        produkter.push(`${antal}x ${produktNavn} - Vægt: ${vægt}g - Pris: ${pris}DDK`);
+        produkter.push(`${antal}x ${produktNavn} - Vægt: ${vægt}g - Pris: ${pris}DKK`);
         produktDetaljer.push(
                 `${antal}x ${produktNavn}:\n` +
-                `  - Plastik: ${plastikGram}g (${prisPlastik} DDK)\n` +
-                `  - Metal: ${metalGram}g (${prisMetal} DDK)\n` +
-                `  - Glas: ${glasGram}g (${prisGlas} DDK)\n` +
-                `  - Træ: ${træGram}g (${prisTræ} DDK)\n`
+                `  - Plastik: ${plastikGram}g (${prisPlastik} DKK)\n` +
+                `  - Metal: ${metalGram}g (${prisMetal} DKK)\n` +
+                `  - Glas: ${glasGram}g (${prisGlas} DKK)\n` +
+                `  - Træ: ${træGram}g (${prisTræ} DKK)\n`
         );
       }
     });
