@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7c07631-fc78-4d8f-8da2-f7d3075db4d7" name="Changes" comment="K">
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite-project/src/Beregner.html" beforeDir="false" afterPath="$PROJECT_DIR$/vite-project/src/Beregner.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite-project/src/style2.css" beforeDir="false" afterPath="$PROJECT_DIR$/vite-project/src/style2.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +139,7 @@
       <workItem from="1742285185702" duration="6331000" />
       <workItem from="1742372100746" duration="8180000" />
       <workItem from="1742894299164" duration="17436000" />
-      <workItem from="1742983698465" duration="2114000" />
+      <workItem from="1743757253335" duration="692000" />
     </task>
     <servers />
   </component>
