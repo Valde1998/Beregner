@@ -1,0 +1,23 @@
+@startuml Packwise_Flow_UML
+title Systemflow for Packwise Beregner
+
+actor Bruger as user
+participant "CSV-filer" as csv
+participant "Beregner-UI" as ui
+participant "Beregningslogik" as logic
+participant "EmailJS" as email
+
+user -> csv: Henter data (material_data.csv, material_prices.csv)
+csv --> ui: Returnerer produktdata
+
+loop Brugerinteraktion
+  user -> ui: Vælger produkt\nIndtaster antal
+  ui -> logic: Anmod beregning
+  logic --> ui: Returner opdateret pris
+end
+
+user -> ui: Anmoder e-mail
+ui -> email: Send beregning
+email --> user: Bekræftelsesmail
+
+@enduml
