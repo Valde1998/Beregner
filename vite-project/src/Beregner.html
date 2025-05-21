@@ -70,20 +70,17 @@
 
 <script>
   let produktCount = 1;
-  let materialData = {}; // Gemmer materiale data fra CSV
-  let materialPrices = {}; // Gemmer materialepriser fra CSV
-  let availableProducts = []; // Liste over produkter fra CSV
+  let materialData = {};
+  let materialPrices = {};
+  let availableProducts = [];
 
-  // Indlæs CSV data
+
   async function loadMaterialData() {
     try {
-      // Indlæs produktdata
       const response = await fetch('material_data.csv');
       if (!response.ok) throw new Error('Kunne ikke indlæse produktdata CSV fil');
       const csvText = await response.text();
       const lines = csvText.split('\n').filter(line => line.trim() !== '');
-
-      // Fjern header og tomme linjer
       const headers = lines[0].split(',').map(h => h.trim());
       for (let i = 1; i < lines.length; i++) {
         const values = lines[i].split(',');
@@ -97,25 +94,16 @@
         };
         materialData[product.id] = product;
       }
-
-      // Opret liste over tilgængelige produkter
       availableProducts = Object.keys(materialData).map(id => {
         return {
           id: id,
-          name: materialData[id].name || id // Brug navn eller id hvis navn mangler
+          name: materialData[id].name || id
         };
       });
-
-      // Sorter produkter alfabetisk efter navn
-      availableProducts.sort((a, b) => a.name.localeCompare(b.name));
-
-      // Indlæs prisdata
       const priceResponse = await fetch('material_prices.csv');
       if (!priceResponse.ok) throw new Error('Kunne ikke indlæse prisdata CSV fil');
       const priceCsvText = await priceResponse.text();
       const priceLines = priceCsvText.split('\n').filter(line => line.trim() !== '');
-
-      // Parse prisdata
       for (let i = 1; i < priceLines.length; i++) {
         const [material, pris] = priceLines[i].split(',');
         if (material && pris) {
@@ -125,22 +113,20 @@
 
       console.log('Data indlæst succesfuldt:', {materialData, materialPrices, availableProducts});
 
-      // Opdater alle dropdowns efter data er indlæst
+
       updateAllProductDropdowns();
     } catch (error) {
       console.error('Fejl ved indlæsning af data:', error);
-      showAlert("Materiale data kunne ikke indlæses fuldt ud. Bruger begrænset datasæt.");
+      showAlert("Materiale data kunne ikke indlæses.");
     }
   }
 
-  // Opdater en enkelt dropdown med produkter fra CSV
+
   function updateProductDropdown(dropdown) {
     const currentValue = dropdown.value; // Gem nuværende valg
 
-    // Ryd dropdown
     dropdown.innerHTML = '<option value="">Vælg et produkt</option>';
 
-    // Tilføj produkter fra CSV
     availableProducts.forEach(product => {
       const option = document.createElement('option');
       option.value = product.id;
@@ -148,13 +134,11 @@
       dropdown.appendChild(option);
     });
 
-    // Gendan tidligere valg hvis det stadig findes
     if (currentValue && availableProducts.some(p => p.id === currentValue)) {
       dropdown.value = currentValue;
     }
   }
 
-  // Opdater alle produkt dropdowns
   function updateAllProductDropdowns() {
     const dropdowns = document.querySelectorAll('.produkt-valg');
     dropdowns.forEach(dropdown => {
@@ -200,12 +184,10 @@
 
     container.appendChild(produktDiv);
 
-    // Opdater dropdown for det nye produkt
     const newDropdown = document.getElementById(`produkt-valg-${produktCount}`);
     updateProductDropdown(newDropdown);
   }
 
-  // Resten af dine funktioner forbliver uændret
   function sletProdukt(button) {
     const produktDiv = button.parentElement;
     produktDiv.remove();
@@ -286,14 +268,14 @@
         materialeInfo.style.display = isEditing ? "block" : "none";
         editSaveButton.style.display = "block";
 
-        // Hent materialevægte fra CSV-data
+
         const productData = materialData[produktValg] || {};
         const defaultPlastik = productData.plastik || 0;
         const defaultMetal = productData.metal || 0;
         const defaultGlas = productData.glas || 0;
         const defaultTræ = productData.træ || 0;
 
-        // Sæt standardværdier hvis felterne er tomme
+
         if (!produktDiv.querySelector(".plastik-gram").value && defaultPlastik !== 0) {
           produktDiv.querySelector(".plastik-gram").value = defaultPlastik;
         }
@@ -308,17 +290,16 @@
         }
       }
 
-      // Beregn priser baseret på indtastede vægte
       let plastikGram = parseFloat(produktDiv.querySelector(".plastik-gram").value) || 0;
       let metalGram = parseFloat(produktDiv.querySelector(".metal-gram").value) || 0;
       let glasGram = parseFloat(produktDiv.querySelector(".glas-gram").value) || 0;
       let træGram = parseFloat(produktDiv.querySelector(".træ-gram").value) || 0;
       const antal = parseInt(antalInput.value) || 0;
 
-      const prisPlastik = (plastikGram * (materialPrices.plastik || 0.004) * antal).toFixed(2);
-      const prisMetal = (metalGram * (materialPrices.metal || 0.001) * antal).toFixed(2);
-      const prisGlas = (glasGram * (materialPrices.glas || 0.002) * antal).toFixed(2);
-      const prisTræ = (træGram * (materialPrices.træ || 0.00066) * antal).toFixed(2);
+      const prisPlastik = (plastikGram * (materialPrices.plastik ) * antal).toFixed(2);
+      const prisMetal = (metalGram * (materialPrices.metal) * antal).toFixed(2);
+      const prisGlas = (glasGram * (materialPrices.glas ) * antal).toFixed(2);
+      const prisTræ = (træGram * (materialPrices.træ ) * antal).toFixed(2);
       const totalPris = (parseFloat(prisPlastik) + parseFloat(prisMetal) + parseFloat(prisGlas) + parseFloat(prisTræ)).toFixed(2);
 
       produktDiv.querySelector(".pris-plastik").value = prisPlastik;
@@ -426,7 +407,6 @@
     modal.style.display = "none";
   }
 
-  // Initialisering
   document.addEventListener("DOMContentLoaded", function() {
     emailjs.init("MgTN6UfGPPCv0OA2B");
     loadMaterialData();
