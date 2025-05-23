@@ -74,13 +74,14 @@
   let materialPrices = {};
   let availableProducts = [];
 
-
   async function loadMaterialData() {
+    console.log("Starter indlæsning af materiale-data...");
     try {
       const response = await fetch('material_data.csv');
       if (!response.ok) throw new Error('Kunne ikke indlæse produktdata CSV fil');
       const csvText = await response.text();
       const lines = csvText.split('\n').filter(line => line.trim() !== '');
+
       const headers = lines[0].split(',').map(h => h.trim());
       for (let i = 1; i < lines.length; i++) {
         const values = lines[i].split(',');
@@ -94,16 +95,18 @@
         };
         materialData[product.id] = product;
       }
+
       availableProducts = Object.keys(materialData).map(id => {
-        return {
-          id: id,
-          name: materialData[id].name || id
-        };
+        return { id, name: materialData[id].name || id };
       });
+
+      availableProducts.sort((a, b) => a.name.localeCompare(b.name));
+
       const priceResponse = await fetch('material_prices.csv');
       if (!priceResponse.ok) throw new Error('Kunne ikke indlæse prisdata CSV fil');
       const priceCsvText = await priceResponse.text();
       const priceLines = priceCsvText.split('\n').filter(line => line.trim() !== '');
+
       for (let i = 1; i < priceLines.length; i++) {
         const [material, pris] = priceLines[i].split(',');
         if (material && pris) {
@@ -111,20 +114,17 @@
         }
       }
 
-      console.log('Data indlæst succesfuldt:', {materialData, materialPrices, availableProducts});
-
-
       updateAllProductDropdowns();
+      console.log("Materialedata indlæst succesfuldt");
     } catch (error) {
-      console.error('Fejl ved indlæsning af data:', error);
-      showAlert("Materiale data kunne ikke indlæses.");
+      console.error("Fejl ved indlæsning af data:", error);
+      showAlert("Materiale data kunne ikke indlæses fuldt ud. Bruger begrænset datasæt.");
     }
   }
 
-
   function updateProductDropdown(dropdown) {
-    const currentValue = dropdown.value; // Gem nuværende valg
-
+    console.log("Opdaterer produktdropdown for:", dropdown.id);
+    const currentValue = dropdown.value;
     dropdown.innerHTML = '<option value="">Vælg et produkt</option>';
 
     availableProducts.forEach(product => {
@@ -140,6 +140,7 @@
   }
 
   function updateAllProductDropdowns() {
+    console.log("Opdaterer alle produktdropdowns");
     const dropdowns = document.querySelectorAll('.produkt-valg');
     dropdowns.forEach(dropdown => {
       updateProductDropdown(dropdown);
@@ -147,6 +148,7 @@
   }
 
   function tilføjProdukt() {
+    console.log("Tilføjer nyt produktfelt");
     produktCount++;
     const container = document.getElementById("produkt-container");
 
@@ -167,7 +169,7 @@
       <input type="number" id="antal-${produktCount}" class="antal" min="0" value="0" onblur="opdaterVærdier()" required style="display: none;" placeholder="Indtast antal">
       <label for="vægt-${produktCount}" class="vægt-label" style="display: none;">Vægt (g):</label>
       <input type="number" id="vægt-${produktCount}" class="vægt" min="0" step="0.001" value="0" onblur="opdaterVærdier()" required readonly style="display: none;">
-      <img class="produkt-gif" src="" alt="Produkt GIF" style="width: 100px; height: auto; display: none;">
+      <img class="produkt-gif" src="" alt="Produkt GIF" style="width: auto; height: auto; display: none;">
       <button type="button" id="edit-product-button" class="edit-save-button" onclick="toggleEditSave(this)" style="display: none;">Rediger dine produktdata</button>
       <div id="materiale-info-${produktCount}" class="materiale-info">
         <label>Plastik (g): <input type="number" class="plastik-gram" onblur="opdaterVærdier()"></label><br>
@@ -183,18 +185,19 @@
     `;
 
     container.appendChild(produktDiv);
-
     const newDropdown = document.getElementById(`produkt-valg-${produktCount}`);
     updateProductDropdown(newDropdown);
   }
 
   function sletProdukt(button) {
+    console.log("Sletter produkt");
     const produktDiv = button.parentElement;
     produktDiv.remove();
     opdaterVærdier();
   }
 
   function nulstilProdukt(button) {
+    console.log("Nulstiller produkt");
     const produktDiv = button.parentElement;
     produktDiv.querySelector(".produkt-valg").value = "";
     produktDiv.querySelector(".antal").value = 0;
@@ -208,6 +211,7 @@
   }
 
   function nulstilOgOpdater(selectElement) {
+    console.log("Nulstiller og opdaterer produkt");
     const produktDiv = selectElement.closest(".produkt");
     produktDiv.querySelector(".antal").value = 0;
     produktDiv.querySelector(".vægt").value = 0;
@@ -220,6 +224,7 @@
   }
 
   function toggleEditSave(button) {
+    console.log("Toggler edit/save tilstand");
     const produktDiv = button.parentElement;
     const materialeInfo = produktDiv.querySelector(".materiale-info");
     const produktGif = produktDiv.querySelector(".produkt-gif");
@@ -240,6 +245,7 @@
   }
 
   function opdaterVærdier() {
+    console.log("Opdaterer beregninger");
     const produkter = document.querySelectorAll(".produkt");
     let samletPris = 0;
     let samletAntal = 0;
@@ -268,13 +274,11 @@
         materialeInfo.style.display = isEditing ? "block" : "none";
         editSaveButton.style.display = "block";
 
-
         const productData = materialData[produktValg] || {};
         const defaultPlastik = productData.plastik || 0;
         const defaultMetal = productData.metal || 0;
         const defaultGlas = productData.glas || 0;
         const defaultTræ = productData.træ || 0;
-
 
         if (!produktDiv.querySelector(".plastik-gram").value && defaultPlastik !== 0) {
           produktDiv.querySelector(".plastik-gram").value = defaultPlastik;
@@ -296,10 +300,10 @@
       let træGram = parseFloat(produktDiv.querySelector(".træ-gram").value) || 0;
       const antal = parseInt(antalInput.value) || 0;
 
-      const prisPlastik = (plastikGram * (materialPrices.plastik ) * antal).toFixed(2);
-      const prisMetal = (metalGram * (materialPrices.metal) * antal).toFixed(2);
-      const prisGlas = (glasGram * (materialPrices.glas ) * antal).toFixed(2);
-      const prisTræ = (træGram * (materialPrices.træ ) * antal).toFixed(2);
+      const prisPlastik = (plastikGram * (materialPrices.plastik || 0.004) * antal).toFixed(2);
+      const prisMetal = (metalGram * (materialPrices.metal || 0.001) * antal).toFixed(2);
+      const prisGlas = (glasGram * (materialPrices.glas || 0.002) * antal).toFixed(2);
+      const prisTræ = (træGram * (materialPrices.træ || 0.00066) * antal).toFixed(2);
       const totalPris = (parseFloat(prisPlastik) + parseFloat(prisMetal) + parseFloat(prisGlas) + parseFloat(prisTræ)).toFixed(2);
 
       produktDiv.querySelector(".pris-plastik").value = prisPlastik;
@@ -320,6 +324,7 @@
   }
 
   function sendEmail() {
+    console.log("Forsøger at sende email");
     const userEmail = document.getElementById("user-email").value;
     if (!userEmail) {
       showAlert("Indtast din e-mailadresse.");
@@ -386,16 +391,17 @@
 
     emailjs.send("service_0ymhfiq", "template_008il29", emailData)
             .then(response => {
+              console.log("Email sendt succesfuldt");
               showAlert("E-mail sendt succesfuldt!");
-              console.log("EmailJS Response:", response);
             })
             .catch(error => {
+              console.error("Email send fejl:", error);
               showAlert("Fejl ved afsendelse af e-mail.");
-              console.error("EmailJS Error:", error);
             });
   }
 
   function showAlert(message) {
+    console.log("Viser alert:", message);
     const modal = document.getElementById("custom-alert");
     const alertMessage = document.getElementById("alert-message");
     alertMessage.textContent = message;
@@ -403,11 +409,13 @@
   }
 
   function closeAlert() {
+    console.log("Lukker alert");
     const modal = document.getElementById("custom-alert");
     modal.style.display = "none";
   }
 
   document.addEventListener("DOMContentLoaded", function() {
+    console.log("Initialiserer beregneren");
     emailjs.init("MgTN6UfGPPCv0OA2B");
     loadMaterialData();
 
